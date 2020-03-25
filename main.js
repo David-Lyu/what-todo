@@ -1,10 +1,10 @@
 $.ajax(
   {
-    header: {
-      "Authorization": make_base_auth
-    },
     method:"get",
-    url: "https://todo.ly/api/user.format",
+    url: "https://cors-anywhere.herokuapp.com/https://todo.ly/api/user.json",
+    beforeSend : function(req) {
+      req.setRequestHeader("Authorization",make_base_auth())
+    },
     success: console.log,
     error: console.error
 
