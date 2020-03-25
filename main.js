@@ -7,7 +7,6 @@ $.ajax(
     },
     success: console.log,
     error: console.error
-
   }
 )
 function make_base_auth(user, password) {
