@@ -2,8 +2,12 @@ class ToDoApp {
   constructor(user,password){
     this.user = user;
     this.pasword = password
+    this.bindHandleSuccessGetUser = this.handleSuccessGetUser.bind(this);
+    this.bindHandleSuccessTypeOfTodo = this.handleSuccessTypeOfTodo.bind(this);
   }
-
+  handleSuccessGetUser(userInfo) {
+    this.fullName = userInfo.FullName;
+  }
 
   getUserTodos(){
     $.ajax(
@@ -13,7 +17,7 @@ class ToDoApp {
         beforeSend : function(req) {
           req.setRequestHeader("Authorization",make_base_auth())
         },
-        success: console.log,
+        success: this.bindHandleSuccessGetUser,
         error: console.error
       }
     )
@@ -24,6 +28,14 @@ class ToDoApp {
     }
   }
 
+  handleSuccessTypeOfTodo(data) {
+    console.log(data)
+    this.projects = data;
+    this.workProject = data[0];
+    this.personalProject = data[3];
+    this.shoppingList = data[4];
+  }
+
   getTypeOfTodos() {
     $.ajax(
       {
@@ -32,7 +44,7 @@ class ToDoApp {
         beforeSend: function (req) {
           req.setRequestHeader("Authorization", make_base_auth())
         },
-        success: console.log,
+        success: this.bindHandleSuccessTypeOfTodo,
         error: console.error
       }
     )
@@ -53,6 +65,32 @@ class ToDoApp {
         },
         success: console.log,
         error: console.error
+      }
+    )
+    function make_base_auth(user, password) {
+      var tok = "lyu.david@yahoo.com" + ":" + "S42c3Bk!!6Fye!E";
+      var hash = btoa(tok);
+      return "Basic " + hash;
+    }
+  }
+
+  getCreateTodos() {
+    $.ajax(
+      {
+        method: "post",
+        url: "https://cors-anywhere.herokuapp.com/https://todo.ly/api/items.json",
+        data: {
+          "ItemObject": {
+            "Content": "New Item",
+            "ProjectId": 3841898
+          }
+        },
+        beforeSend: function (req) {
+          req.setRequestHeader("Authorization", make_base_auth())
+        },
+        success: console.log,
+        error: console.error,
+        dataType: "json"
       }
     )
     function make_base_auth(user, password) {
