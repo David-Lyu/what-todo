@@ -25,8 +25,19 @@ class App {
       li.id = arrayListOfTodo[createListIndex].Id;
       li.parentId = arrayListOfTodo[createListIndex].ProjectId;
       li.appendChild(input)
+      li.addEventListener("click",this.deleteTodos)
       label.appendChild(li);
       this.todayTodosList.appendChild(label);
     }
+  }
+
+  deleteTodos(event) {
+    console.log(event.target,event.currentTarget)
+    this.deleteTodosArray = [];
+    this.deleteTodosArray.push(event.currentTarget.id);
+    var delElement = document.createElement("del");
+    delElement.textContent = event.currentTarget.textContent
+    event.currentTarget.innerHTML = "";
+    event.currentTarget.appendChild(delElement)
   }
 }
