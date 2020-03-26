@@ -3,37 +3,65 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <link rel="stylesheet" href="css/grid.css">
+  <link rel="stylesheet" href="style.css">
+  <title>ToDo List</title>
 </head>
-<body>
-  <header>
-    <h1>Work Out Schedule</h1>
-    <h2>Month</h2>
+<body class="container">
+
+  <header class="row">
+    <h1>Organizational</h1>
   </header>
-  <main>
-    <h3>Work Out</h3>
-    <ul class="weekdays">
-      <li>Sunday</li>
-      <li>Monday</li>
-      <li>Tuesday</li>
-      <li>WednesDay</li>
-      <li>Thursday</li>
-      <li>Friday</li>
-      <li>Saturday</li>
-    </ul>
-    <ul class="days"></ul>
-    <ul class="months"></ul>
-  </main>
-  <aside>
-    <h3>
-      Calories:
-    </h3>
-    <form action=""></form>
-    <h3>Todays Workout</h3>
-    <form action=""></form>
-  </aside>
+
+  <div class="row">
+
+    <aside class="left-aside col-4 hidden">
+      <h3>
+        Todo List:
+      </h3>
+      <form action=""></form>
+    </aside>
+
+    <main class="col-4">
+
+      <div class="calendar hidden">
+        <h1>Month</h1>
+        <ul class="weekdays">
+          <li>Sunday</li>
+          <li>Monday</li>
+          <li>Tuesday</li>
+          <li>WednesDay</li>
+          <li>Thursday</li>
+          <li>Friday</li>
+          <li>Saturday</li>
+        </ul>
+        <ul class="days d-none" id="getDay"></ul>
+        <ul class="months" id="getDaysOfMonth"></ul>
+      </div>
+
+      <section class="today-todo">
+        <h3>
+          <span id="todaysDate"></span>Todo List:
+        </h3>
+        <ul></ul>
+        <button>Add</button>
+        <button>Edit</button>
+      </section>
+    </main>
+
+    <aside class="right-aside col-4 hidden">
+      <h3>
+        Todo List:
+      </h3>
+      <form action=""></form>
+    </aside>
+  </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="component/daysMonths.js"></script>
+  <script src="component/tasteDive.js"></script>
+  <script src="component/app.js"></script>
+
   <script src="main.js"></script>
 </body>
 </html>
