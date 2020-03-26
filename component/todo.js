@@ -84,9 +84,9 @@ class GetToDos {
         method: "post",
         url: "https://cors-anywhere.herokuapp.com/https://todo.ly/api/items.json",
         data: JSON.stringify({
-          "ItemObjects": {
-            "Content": "NewITEMSFORUSTOSEE",
-            "ProjectId": 3841898
+          ItemObject: {
+            Content: "New Item",
+            ProjectId: 3841898
           }
         }),
         beforeSend: function (req) {
