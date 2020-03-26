@@ -1,102 +1,32 @@
-class ToDoApp {
-  constructor(user,password){
-    this.user = user;
-    this.pasword = password
-    this.bindHandleSuccessGetUser = this.handleSuccessGetUser.bind(this);
-    this.bindHandleSuccessTypeOfTodo = this.handleSuccessTypeOfTodo.bind(this);
+class App {
+  constructor(todoInfo,recommendations,todayList) {
+    this.todoInfo = todoInfo;
+    this.recommendations = recommendations;
+    this.todayTodosList = todayList;
   }
-  handleSuccessGetUser(userInfo) {
-    this.fullName = userInfo.FullName;
-  }
-
-  getUserTodos(){
-    $.ajax(
-      {
-        method:"get",
-        url: "https://cors-anywhere.herokuapp.com/https://todo.ly/api/user.json",
-        beforeSend : function(req) {
-          req.setRequestHeader("Authorization",make_base_auth())
-        },
-        success: this.bindHandleSuccessGetUser,
-        error: console.error
-      }
-    )
-    function make_base_auth(user, password) {
-      var tok = "lyu.david@yahoo.com" + ":" + "S42c3Bk!!6Fye!E";
-      var hash = btoa(tok);
-      return "Basic " + hash;
-    }
+  startApp(){
+    this.todoInfo.getUserTodos();
+    this.todoInfo.getTypeOfTodos();
+    this.todoInfo.getListOfTodos();
   }
 
-  handleSuccessTypeOfTodo(data) {
-    console.log(data)
-    this.projects = data;
-    this.workProject = data[0];
-    this.personalProject = data[3];
-    this.shoppingList = data[4];
-  }
-
-  getTypeOfTodos() {
-    $.ajax(
-      {
-        method: "get",
-        url: "https://cors-anywhere.herokuapp.com/https://todo.ly/api/projects.json",
-        beforeSend: function (req) {
-          req.setRequestHeader("Authorization", make_base_auth())
-        },
-        success: this.bindHandleSuccessTypeOfTodo,
-        error: console.error
-      }
-    )
-    function make_base_auth(user, password) {
-      var tok = "lyu.david@yahoo.com" + ":" + "S42c3Bk!!6Fye!E";
-      var hash = btoa(tok);
-      return "Basic " + hash;
-    }
-  }
-
-  getListOfTodos() {
-    $.ajax(
-      {
-        method: "get",
-        url: "https://cors-anywhere.herokuapp.com/https://todo.ly/api/items.json",
-        beforeSend: function (req) {
-          req.setRequestHeader("Authorization", make_base_auth())
-        },
-        success: console.log,
-        error: console.error
-      }
-    )
-    function make_base_auth(user, password) {
-      var tok = "lyu.david@yahoo.com" + ":" + "S42c3Bk!!6Fye!E";
-      var hash = btoa(tok);
-      return "Basic " + hash;
-    }
-  }
-
-  getCreateTodos() {
-    $.ajax(
-      {
-        method: "post",
-        url: "https://cors-anywhere.herokuapp.com/https://todo.ly/api/items.json",
-        data: {
-          "ItemObject": {
-            "Content": "New Item",
-            "ProjectId": 3841898
-          }
-        },
-        beforeSend: function (req) {
-          req.setRequestHeader("Authorization", make_base_auth())
-        },
-        success: console.log,
-        error: console.error,
-        dataType: "json"
-      }
-    )
-    function make_base_auth(user, password) {
-      var tok = "lyu.david@yahoo.com" + ":" + "S42c3Bk!!6Fye!E";
-      var hash = btoa(tok);
-      return "Basic " + hash;
+  makeTodaysTodos() {
+    var arrayListOfTodo = this.todoInfo.listOfTodos;
+    var recommendationsHeading = document.createElement("h4");
+    recommendationsHeading.textContent = "Todays recommended music for shopping is "+ this.recommendations.defaultRecommendation;
+    this.todayTodosList.appendChild(recommendationsHeading)
+    console.log(this.todoInfo.listOfTodos,arrayListOfTodo)
+    for(var createListIndex = 0; createListIndex < arrayListOfTodo.length; createListIndex++) {
+      var label = document.createElement("label")
+      var li = document.createElement("li");
+      var input = document.createElement("input")
+      input.setAttribute("type","checkbox")
+      li.textContent = arrayListOfTodo[createListIndex].Content;
+      li.id = arrayListOfTodo[createListIndex].Id;
+      li.parentId = arrayListOfTodo[createListIndex].ProjectId;
+      li.appendChild(input)
+      label.appendChild(li);
+      this.todayTodosList.appendChild(label);
     }
   }
 }
