@@ -20,4 +20,4 @@ Try the application live at [https://what-todo.davidlyu.com](https://what-todo.d
   - User can get recommendation based on Todos
  
  ## Preview
- 
+ picture to come when app is finished
