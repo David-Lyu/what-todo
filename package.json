@@ -1,0 +1,27 @@
+{
+  "name": "what-todo",
+  "version": "1.0.0",
+  "description": "This app allows the user to create a todo list and also can recommend music for the user to listen to when using the app.",
+  "main": "main.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/David-Lyu/what-todo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/David-Lyu/what-todo/issues"
+  },
+  "homepage": "https://github.com/David-Lyu/what-todo#readme",
+  "devDependencies": {},
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jquery": "^3.5.1",
+    "jsdom": "^16.2.2"
+  }
+}
