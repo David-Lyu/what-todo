@@ -14,8 +14,6 @@ class TheRecommender {
         url: "https://cors-anywhere.herokuapp.com/https://tastedive.com/api/similar",
         method: "GET",
         data: {
-          "q": queryKey,
-          "k": "360893-WhatToDO-OVXD1PAW"
         },
         success: this.bindHandSuccessGetRecommendation,
         error: console.error

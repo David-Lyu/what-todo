@@ -72,7 +72,7 @@ class GetToDos {
       }
     )
     function make_base_auth(user, password) {
-      var tok = "lyu.david@yahoo.com" + ":" + "S42c3Bk!!6Fye!E";
+      var tok =
       var hash = btoa(tok);
       return "Basic " + hash;
     }
@@ -98,7 +98,7 @@ class GetToDos {
       }
     )
     function make_base_auth(user, password) {
-      var tok = "lyu.david@yahoo.com" + ":" + "S42c3Bk!!6Fye!E";
+      var tok =
       var hash = btoa(tok);
       return "Basic " + hash;
     }
