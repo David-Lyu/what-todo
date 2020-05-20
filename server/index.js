@@ -11,7 +11,7 @@ const todoistKey = `Bearer ${process.env.TODOIST}`
 
 app.use(staticMiddleware)
 
-app.get("/api/task/:projectId",(req,res,next)=>{
+app.get("/api/task",(req,res,next)=>{
   const projectId = req.params.projectId;
   $.ajax({
     url: "https://api.todoist.com/rest/v1/tasks",
@@ -19,7 +19,7 @@ app.get("/api/task/:projectId",(req,res,next)=>{
       "Authorization": `Bearer ${process.env.TODOIST}`
     },
     data: {
-      project_id: projectId
+      project_id: 2236484331
     },
     success: (data) => res.status(200).json(data),
     error: (err)=> next(err)
@@ -78,9 +78,9 @@ app.post('/api/task/open/:taskId', (req, res, next) => {
   })
 })
 
-app.delete('/api/task/:taskId', (req,res,next)=>{
+// app.delete('/api/task/:taskId', (req,res,next)=>{
 
-})
+// })
 
 app.get("/api/recommendation/:query",(req,res,next)=>{
   const queryKey = req.params.query;  // getRecommendation(queryKey) {
