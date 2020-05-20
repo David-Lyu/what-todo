@@ -3,14 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
   <link rel="stylesheet" href="css/grid.css">
   <link rel="stylesheet" href="style.css">
   <title>ToDo List</title>
 </head>
 <body class="container">
 
-  <header class="row">
-    <h1>Organizational</h1>
+  <header class="row header">
+    <h1 class="col-8">What Todo?</h1>
+    <h3 class="col-8">Today: <span id="todaysDate"></span></h3>
   </header>
 
   <div class="row">
@@ -41,11 +43,29 @@
 
       <section class="today-todo">
         <h3>
-          <span id="todaysDate"></span>Todo List:
+          Todo List:
         </h3>
-        <ul></ul>
-        <button>Add</button>
-        <button>Edit</button>
+        <table>
+          <thead>
+            <tr>
+              <th>Task</th>
+              <th>Due Date</th>
+              <th>Utilities</th>
+            </tr>
+          </thead>
+          <tbody id="todo">
+            <tr class="strikeout">
+              <td>Strikout</td>
+              <td>Test</td>
+              <td>test</td>
+            </tr>
+            <tr>
+              <td>No</td>
+              <td>StrikeOut</td>
+              <td>Here</td>
+            </tr>
+          </tbody>
+        </table>
       </section>
     </main>
 
@@ -59,11 +79,9 @@
   <!-- <button id="calandarButton">See Calandar</button> --> <!--Making calandar for js-->
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <!-- <script src="component/daysMonths.js"></script>
-  <script src="component/Calandar.js"></script>
-  <script src="component/tasteDive.js"></script>
-  <script src="component/todo.js"></script>
-  <script src="component/app.js"></script> -->
+  <script src="component/create-todo.js"></script>
+  <script src="component/daysMonths.js"></script>
+  <script src="component/app.js"></script>
 
   <script src="main.js"></script>
 </body>
