@@ -68,11 +68,3 @@
 //     error: console.error
 //   }
 // )
-
-
-$.ajax(
-  {
-    url: "http://localhost:3001/api/tasks",
-    success: console.log
-  }
-)

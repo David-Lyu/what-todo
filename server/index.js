@@ -5,6 +5,11 @@ const {window} = new JSDOM("");
 const $ = require("jquery")(window)
 require('dotenv/config')
 const ClientError = require('./client-error');
+const staticMiddleware = require("./static-middleware")
+
+const todoistKey = `Bearer ${process.env.TODOIST}`
+
+app.use(staticMiddleware)
 
 app.get("/api/task/:projectId",(req,res,next)=>{
   const projectId = req.params.projectId;
@@ -28,7 +33,6 @@ app.post("/api/task", (req,res,next)=>{
   if(!dueDate){
     dueDate = "today"
   }
-  console.log(req.body)
   $.ajax(
   {
     url: "https://api.todoist.com/rest/v1/tasks",
@@ -40,19 +44,49 @@ app.post("/api/task", (req,res,next)=>{
     data: JSON.stringify({
       "content": content,
       "due_string": dueDate,
-      project_id: projectId
+      project_id: parseInt(projectId)
     }),
     dataType: "json",
-    success: console.log,
-    error: console.error
+    success: (data)=> res.status(200).json(data),
+    error: err=>next(err)
   })
+})
+
+app.post('/api/task/close/:taskId',(req,res,next)=>{
+  const taskId = req.params.taskId;
+  $.ajax({
+    url: `https://api.todoist.com/rest/v1/tasks/${taskId}/close`,
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${process.env.TODOIST}`,
+    },
+    success: data=>res.status(201).json(data),
+    error: err=>next(err)
+  })
+})
+
+app.post('/api/task/open/:taskId', (req, res, next) => {
+  const taskId = req.params.taskId;
+  $.ajax({
+    url: `https://api.todoist.com/rest/v1/tasks/${taskId}/reopen`,
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${process.env.TODOIST}`,
+    },
+    success: data => res.status(201).json(data),
+    error: err => next(err)
+  })
+})
+
+app.delete('/api/task/:taskId', (req,res,next)=>{
+
 })
 
 app.get("/api/recommendation/:query",(req,res,next)=>{
   const queryKey = req.params.query;  // getRecommendation(queryKey) {
     $.ajax(
       {
-        url: "https://cors-anywhere.herokuapp.com/https://tastedive.com/api/similar",
+        url: "https://tastedive.com/api/similar",
         method: "GET",
         data: {
           "q": queryKey,

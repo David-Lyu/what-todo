@@ -4,7 +4,9 @@
   "description": "This app allows the user to create a todo list and also can recommend music for the user to listen to when using the app.",
   "main": "main.js",
   "scripts": {
-    "start": "node index.js",
+    "dev": "webpack --mode=development --devtool=source-map --watch",
+    "build": "webpack --mode=production",
+    "start": "NODE_ENV=production node server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
