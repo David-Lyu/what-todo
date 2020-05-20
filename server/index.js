@@ -13,9 +13,9 @@ app.use(staticMiddleware)
 
 app.get("/api/task",(req,res,next)=>{
   $.ajax({
-    url: "https://api.todoist.com/rest/v1/tasks",
+    url: "https://cors-anywhere.herokuapp.com/https://api.todoist.com/rest/v1/tasks",
     headers: {
-      "Authorization": todoistKey
+      "Authorization": `Bearer ${process.env.TODOIST}`
     },
     data: {
       project_id: 2236484331
@@ -113,7 +113,7 @@ app.get("/api/recommendation/:query",(req,res,next)=>{
   const queryKey = req.params.query;  // getRecommendation(queryKey) {
     $.ajax(
       {
-        url: "https://tastedive.com/api/similar",
+        url: "https://cors-anywhere.herokuapp.com/https://tastedive.com/api/similar",
         method: "GET",
         data: {
           "q": queryKey,

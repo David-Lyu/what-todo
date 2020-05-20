@@ -25,7 +25,7 @@ class App {
 
   handleGetTodosSuccess(data){
     console.log(data)
-    // this.createTodo.renderTodo(data)
+    this.createTodo.renderTodo(data)
   }
 
   getTodos() {
