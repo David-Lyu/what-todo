@@ -30,9 +30,9 @@ class App {
   // }
 
   getTodos() {
-    $ajax(
+    $.ajax(
       {
-        url: "https://api.todoist"
+        url: "/api/task"
       }
     )
   }

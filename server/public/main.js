@@ -1,12 +1,12 @@
-// var todayTodos = document.querySelector(".today-todo");
-// var todayTodosList = todayTodos.querySelector("ul");
+var todayTodos = document.querySelector(".today-todo");
+var todayTodosList = todayTodos.querySelector("ul");
 
-// var app = new App()
-// app.getRecommendation("shopping")
+var app = new App()
+app.getTodos()
 
 
-// var giveDate = document.getElementById("todaysDate")
-// giveDate.textContent = monthNames[month] + " " + today + " ";
+var giveDate = document.getElementById("todaysDate")
+giveDate.textContent = monthNames[month] + " " + today + " ";
 
 
 // get todos
@@ -68,11 +68,3 @@
 //     error: console.error
 //   }
 // )
-
-
-$.ajax(
-  {
-    url: "http://localhost:3001/api/tasks",
-    success: console.log
-  }
-)
