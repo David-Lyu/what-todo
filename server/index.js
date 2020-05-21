@@ -12,9 +12,8 @@ const todoistKey = `Bearer ${process.env.TODOIST}`
 app.use(staticMiddleware)
 
 app.get("/api/task",(req,res,next)=>{
-  const projectId = req.params.projectId;
   $.ajax({
-    url: "https://api.todoist.com/rest/v1/tasks",
+    url: "https://cors-anywhere.herokuapp.com/https://api.todoist.com/rest/v1/tasks",
     headers: {
       "Authorization": `Bearer ${process.env.TODOIST}`
     },
@@ -35,10 +34,10 @@ app.post("/api/task", (req,res,next)=>{
   }
   $.ajax(
   {
-    url: "https://api.todoist.com/rest/v1/tasks",
+      url: "https://cors-anywhere.herokuapp.com/https://api.todoist.com/rest/v1/tasks",
     method: "POST",
     headers: {
-      "Authorization": `Bearer ${process.env.TODOIST}`,
+      "Authorization": todoistKey,
       "Content-Type": "application/json"
     },
     data: JSON.stringify({
@@ -55,12 +54,12 @@ app.post("/api/task", (req,res,next)=>{
 app.post('/api/task/close/:taskId',(req,res,next)=>{
   const taskId = req.params.taskId;
   $.ajax({
-    url: `https://api.todoist.com/rest/v1/tasks/${taskId}/close`,
+    url: `https://cors-anywhere.herokuapp.com/https://api.todoist.com/rest/v1/tasks/${taskId}/close`,
     method: "POST",
     headers: {
-      "Authorization": `Bearer ${process.env.TODOIST}`,
+      "Authorization": todoistKey,
     },
-    success: data=>res.status(201).json(data),
+    success: data=>res.status(200).json(data),
     error: err=>next(err)
   })
 })
@@ -68,25 +67,53 @@ app.post('/api/task/close/:taskId',(req,res,next)=>{
 app.post('/api/task/open/:taskId', (req, res, next) => {
   const taskId = req.params.taskId;
   $.ajax({
-    url: `https://api.todoist.com/rest/v1/tasks/${taskId}/reopen`,
+    url: `https://cors-anywhere.herokuapp.com/https://api.todoist.com/rest/v1/tasks/${taskId}/reopen`,
     method: "POST",
     headers: {
-      "Authorization": `Bearer ${process.env.TODOIST}`,
+      "Authorization": todoistKey,
     },
     success: data => res.status(201).json(data),
     error: err => next(err)
   })
 })
 
-// app.delete('/api/task/:taskId', (req,res,next)=>{
+app.post('/api/task/update/:taskId',(req,res,next)=>{
+  const taskId = req.params.taskId;
+  const {content, dueString} = req.body
+  $.ajax({
+    url: `https://cors-anywhere.herokuapp.com/https://api.todoist.com/rest/v1/tasks/${taskId}`,
+    method: "POST",
+    headers: {
+      Authorization: todoistKey,
+      "Content-Type": "application/json",
+    },
+    data: {
+      content: content,
+      due_string: dueString
+    },
+    success: console.log,
+    error: console.error
+  })
+})
 
-// })
+app.delete('/api/task/:taskId', (req,res,next)=>{
+  const taskId = req.params.taskId
+  $.ajax({
+    url: `https://cors-anywhere.herokuapp.com/https://api.todoist.com/rest/v1/tasks/${taskId}`,
+    method: "DELETE",
+    headers: {
+      Authorization: todoistKey,
+    },
+    success: data=> res.status(201).json({data}),
+    error: err=> next(err)
+  })
+})
 
 app.get("/api/recommendation/:query",(req,res,next)=>{
   const queryKey = req.params.query;  // getRecommendation(queryKey) {
     $.ajax(
       {
-        url: "https://tastedive.com/api/similar",
+        url: "https://cors-anywhere.herokuapp.com/https://tastedive.com/api/similar",
         method: "GET",
         data: {
           "q": queryKey,

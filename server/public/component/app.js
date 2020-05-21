@@ -1,10 +1,8 @@
 class App {
-  constructor(todoInfo,recommendations,todayList) {
-    this.todoInfo = todoInfo;
-    this.recommendations = recommendations;
-    this.todayTodosList = todayList;
-
-    this.bindHandSuccessGetRecommendation = this.handleSuccessGetRecommendation.bind(this);
+  constructor(createTodo) {
+    this.createTodo = createTodo
+    this.handleGetTodosSuccess = this.handleGetTodosSuccess.bind(this)
+    this.handleSuccessGetRecommendation = this.handleSuccessGetRecommendation.bind(this);
   }
 
 
@@ -14,29 +12,35 @@ class App {
     this.defaultRecommendation = data.Similar.Results[0].Name;
   }
 
-  // getRecommendation(queryKey) {
-  //   $.ajax(
-  //     {
-  //       url: "https://cors-anywhere.herokuapp.com/https://tastedive.com/api/similar",
-  //       method: "GET",
-  //       data: {
-  //         "q": queryKey,
-  //         "k": "360893-WhatToDO-OVXD1PAW"
-  //       },
-  //       success: this.bindHandSuccessGetRecommendation,
-  //       error: console.error
-  //     }
-  //   )
-  // }
-
-  getTodos() {
+  getRecommendation(queryKey) {
     $.ajax(
       {
-        url: "/api/task"
+        url: `/api/recommendation/${queryKey}`,
+        method: "GET",
+        success: this.handleSuccessGetRecommendation,
+        error: console.error
       }
     )
   }
 
+  handleGetTodosSuccess(data){
+    console.log(data)
+    this.createTodo.renderTodo(data)
+  }
+
+  getTodos() {
+    $.ajax(
+      {
+        url: "/api/task",
+        success: this.handleGetTodosSuccess,
+        error: console.error
+      }
+    )
+  }
+
+  start(){
+    this.getTodos();
+  }
 }
 
 // makeTodaysTodos() {
