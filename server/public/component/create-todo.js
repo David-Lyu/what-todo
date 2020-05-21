@@ -35,12 +35,12 @@ class CreateTodo {
         console.log(todos[i], todos[i].content)
         const tr = document.createElement("tr");
         tr.addEventListener("click", (e)=>this.handleTrClick(e,todos[i].id))
+        tr.classList.add("pointer")
         const tdContent = document.createElement("td")
         tdContent.textContent = todos[i].content
-        const tdDueDate = document.createElement("td")
         const tdUtilites = document.createElement("td")
         this.makeUtilites(tdUtilites)
-        tr.append(tdContent,tdDueDate,tdUtilites)
+        tr.append(tdContent,tdUtilites)
         tbody.append(tr)
       }
     }else {
@@ -56,6 +56,8 @@ class CreateTodo {
     const editIcon = document.createElement("i")
     editIcon.className = "far fa-edit"
     editIcon.addEventListener("click", this.handleEditClick)
+    editIcon.addEventListener("mouseover", ()=>{editIcon.classList.add("edit-pointer")})
+    editIcon.addEventListener("mouseout", ()=> editIcon.classList.remove("edit-pointer"))
     td.appendChild(editIcon)
   }
 }
