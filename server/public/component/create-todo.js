@@ -4,12 +4,20 @@ class CreateTodo {
     this.handleEditClick = this.handleEditClick.bind(this)
   }
 
-  handleTrClick(e) {
+  handleTrClick(e,id) {
     console.log(e.currentTarget.classList, typeof e.currentTarget.className)
     if(!e.currentTarget.className.includes("strikeout")){
       e.currentTarget.classList.add("strikeout")
+      $.ajax({
+        method: "post",
+        url: `/api/task/close/${id}`,
+      })
     }else {
-      e.currentTarget.classList.remove("strikeout")
+      e.currentTarget.classList.remove("strikeout"),
+        $.ajax({
+          method: "post",
+          url: `/api/task/open/${id}`,
+        })
     }
   }
 
@@ -26,7 +34,7 @@ class CreateTodo {
       for(let i = 0; i < todos.length; i++){
         console.log(todos[i], todos[i].content)
         const tr = document.createElement("tr");
-        tr.addEventListener("click", this.handleTrClick)
+        tr.addEventListener("click", (e)=>this.handleTrClick(e,todos[i].id))
         const tdContent = document.createElement("td")
         tdContent.textContent = todos[i].content
         const tdDueDate = document.createElement("td")
