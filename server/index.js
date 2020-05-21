@@ -34,7 +34,7 @@ app.post("/api/task", (req,res,next)=>{
   }
   $.ajax(
   {
-    url: "https://api.todoist.com/rest/v1/tasks",
+      url: "https://cors-anywhere.herokuapp.com/https://api.todoist.com/rest/v1/tasks",
     method: "POST",
     headers: {
       "Authorization": todoistKey,
@@ -54,7 +54,7 @@ app.post("/api/task", (req,res,next)=>{
 app.post('/api/task/close/:taskId',(req,res,next)=>{
   const taskId = req.params.taskId;
   $.ajax({
-    url: `https://api.todoist.com/rest/v1/tasks/${taskId}/close`,
+    url: `https://cors-anywhere.herokuapp.com/https://api.todoist.com/rest/v1/tasks/${taskId}/close`,
     method: "POST",
     headers: {
       "Authorization": todoistKey,
@@ -67,7 +67,7 @@ app.post('/api/task/close/:taskId',(req,res,next)=>{
 app.post('/api/task/open/:taskId', (req, res, next) => {
   const taskId = req.params.taskId;
   $.ajax({
-    url: `https://api.todoist.com/rest/v1/tasks/${taskId}/reopen`,
+    url: `https://cors-anywhere.herokuapp.com/https://api.todoist.com/rest/v1/tasks/${taskId}/reopen`,
     method: "POST",
     headers: {
       "Authorization": todoistKey,
@@ -81,7 +81,7 @@ app.post('/api/task/update/:taskId',(req,res,next)=>{
   const taskId = req.params.taskId;
   const {content, dueString} = req.body
   $.ajax({
-    url: `https://api.todoist.com/rest/v1/tasks/${taskId}`,
+    url: `https://cors-anywhere.herokuapp.com/https://api.todoist.com/rest/v1/tasks/${taskId}`,
     method: "POST",
     headers: {
       Authorization: todoistKey,
@@ -99,7 +99,7 @@ app.post('/api/task/update/:taskId',(req,res,next)=>{
 app.delete('/api/task/:taskId', (req,res,next)=>{
   const taskId = req.params.taskId
   $.ajax({
-    url: `https://api.todoist.com/rest/v1/tasks/${taskId}`,
+    url: `https://cors-anywhere.herokuapp.com/https://api.todoist.com/rest/v1/tasks/${taskId}`,
     method: "DELETE",
     headers: {
       Authorization: todoistKey,
