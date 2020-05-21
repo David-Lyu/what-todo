@@ -6,10 +6,12 @@ class App {
   }
 
 
-  handleSuccessGetRecommendation(data) {
-    console.log(data);
+  handleSuccessGetRecommendation(data, queryKey) {
+    let projectName = queryKey
     this.recommendationObject = data;
     this.defaultRecommendation = data.Similar.Results[0].Name;
+    const recommendationsHeading = document.getElementById("recommendation");
+    recommendationsHeading.textContent = `Todays recommended music for ${projectName} is ` + this.recommendations.defaultRecommendation;
   }
 
   getRecommendation(queryKey) {
@@ -17,7 +19,7 @@ class App {
       {
         url: `/api/recommendation/${queryKey}`,
         method: "GET",
-        success: this.handleSuccessGetRecommendation,
+        success: (data)=> this.handleSuccessGetRecommendation(data,queryKey),
         error: console.error
       }
     )
