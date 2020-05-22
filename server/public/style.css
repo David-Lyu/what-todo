@@ -2,9 +2,19 @@
   display: none;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
+.edit-pointer {
+  cursor: pointer;
+  border: 1px yellow solid;
+  background-color: white;
+}
+
 body{
   max-width: 1200px;
-  margin: auto
+  margin: auto;
 }
 
 header.header {
@@ -33,4 +43,16 @@ tr.strikeout td:before {
     left: 0;
     border-bottom: 1px solid #111;
     width: 100%;
+}
+
+thead {
+  background-color: grey;
+}
+
+tbody > :nth-child(even) {
+  background-color: aquamarine;
+}
+
+tbody > :nth-child(odd) {
+  background-color: dodgerblue;
 }

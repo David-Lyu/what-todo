@@ -7,4 +7,4 @@ const app = new App(createTodos)
 app.start()
 
 const giveDate = document.getElementById("todaysDate")
-giveDate.textContent = monthNames[month] + " " + today + ", " + year;
+giveDate.textContent = monthNames[month - 1] + " " + today + ", " + year;
