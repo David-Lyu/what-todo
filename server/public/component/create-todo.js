@@ -32,7 +32,6 @@ class CreateTodo {
     const tbody = document.getElementById("todo")
     if(todos.length !== 0){
       for(let i = 0; i < todos.length; i++){
-        console.log(todos[i], todos[i].content)
         const tr = document.createElement("tr");
         tr.addEventListener("click", (e)=>this.handleTrClick(e,todos[i].id))
         tr.classList.add("pointer")

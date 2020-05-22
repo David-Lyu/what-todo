@@ -1,7 +1,10 @@
 class App {
   constructor(createTodo) {
     this.createTodo = createTodo
-    this.handleGetTodosSuccess = this.handleGetTodosSuccess.bind(this)
+    this.getTodosTask = this.getTodosTask.bind(this)
+    this.createProjects = new CreateProjects(this.getTodosTask)
+    this.handleGetTodosTaskSuccess = this.handleGetTodosTaskSuccess.bind(this)
+    this.handleGetTodoProjectSuccess = this.handleGetTodoProjectSuccess.bind(this)
     this.handleSuccessGetRecommendation = this.handleSuccessGetRecommendation.bind(this);
   }
 
@@ -9,9 +12,10 @@ class App {
   handleSuccessGetRecommendation(data, queryKey) {
     let projectName = queryKey
     this.recommendationObject = data;
-    this.defaultRecommendation = data.Similar.Results[0].Name;
-    const recommendationsHeading = document.getElementById("recommendation");
-    recommendationsHeading.textContent = `Todays recommended music for ${projectName} is ` + this.recommendations.defaultRecommendation;
+    console.log(data)
+    // this.defaultRecommendation = data.Similar.Results[0].Name;
+    // const recommendationsHeading = document.getElementById("recommendation");
+    // recommendationsHeading.textContent = `Todays recommended music for ${projectName} is ` + this.recommendations.defaultRecommendation;
   }
 
   getRecommendation(queryKey) {
@@ -19,30 +23,44 @@ class App {
       {
         url: `/api/recommendation/${queryKey}`,
         method: "GET",
-        success: (data)=> this.handleSuccessGetRecommendation(data,queryKey),
+        success: data => this.handleSuccessGetRecommendation(data,queryKey),
         error: console.error
       }
     )
   }
 
-  handleGetTodosSuccess(data){
+  handleGetTodosTaskSuccess(data, queryKey){
     console.log(data)
     this.createTodo.renderTodo(data)
-    this.getRecommendation("")
+    this.getRecommendation(queryKey)
   }
 
-  getTodos() {
+  getTodosTask(projectId = 2236484331, queryKey = "shopping") {
     $.ajax(
       {
-        url: "/api/task",
-        success: this.handleGetTodosSuccess,
+        url: `/api/task/${projectId}`,
+        success: data => this.handleGetTodosTaskSuccess(data,queryKey),
         error: console.error
       }
     )
+  }
+
+  handleGetTodoProjectSuccess(data){
+    console.log(data)
+    this.createProjects.createProjectButtons(data)
+  }
+
+  getTodosProjects(){
+    $.ajax({
+      url: '/api/projects',
+      success: this.handleGetTodoProjectSuccess,
+      error: console.error
+    })
   }
 
   start(){
-    this.getTodos();
+    this.getTodosTask();
+    this.getTodosProjects();
   }
 }
 
