@@ -11,11 +11,14 @@ class App {
 
   handleSuccessGetRecommendation(data, queryKey) {
     let projectName = queryKey
-    this.recommendationObject = data;
-    console.log(data)
-    // this.defaultRecommendation = data.Similar.Results[0].Name;
-    // const recommendationsHeading = document.getElementById("recommendation");
-    // recommendationsHeading.textContent = `Todays recommended music for ${projectName} is ` + this.recommendations.defaultRecommendation;
+    console.log(data.Similar)
+    const defaultRecommendation = data.Similar.Results[0].Name;
+    const recommendationsHeading = document.getElementById("recommendation");
+    recommendationsHeading.textContent = `Todays recommended music for ${projectName} is ${defaultRecommendation}`;
+    const tableTodos = document.getElementById("getTodos")
+    const loadingScreen = document.getElementById("loadingScreen")
+    tableTodos.classList.remove("hidden")
+    loadingScreen.classList.add("hidden")
   }
 
   getRecommendation(queryKey) {
