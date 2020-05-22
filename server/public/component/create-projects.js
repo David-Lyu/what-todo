@@ -1,10 +1,12 @@
 class CreateProjects {
-  constructor(getTodoTasks) {
+  constructor(getTodoTasks,tbody) {
     this.handleClick = this.handleClick.bind(this)
     this.getTodoTasks = getTodoTasks
+    this.tbody = tbody
   }
 
   handleClick(project){
+    this.tbody.innerHTML = '';
     this.getTodoTasks(project.id,project.name)
   }
 
