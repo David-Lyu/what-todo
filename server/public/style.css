@@ -12,7 +12,7 @@
   background-color: white;
 }
 
-body{
+body.container{
   max-width: 1200px;
   margin: auto;
 }

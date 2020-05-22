@@ -9,10 +9,22 @@ const todoistKey = `Bearer ${process.env.TODOIST}`
 
 app.use(staticMiddleware)
 
-app.get("/api/task",(req,res,next) => {
+app.get("/api/projects", (req,res,next) => {
+  const parameter = {
+    headers: {
+      Authorization: todoistKey
+    }
+  }
+  axios.get("https://api.todoist.com/rest/v1/projects",parameter)
+  .then(data => res.status(200).json(data.data))
+  .catch(err => next(err))
+})
+
+app.get("/api/task/:projectId",(req,res,next) => {
+  const project_id = req.params.projectId
   const parameter = {
     params: {
-      project_id: 2236484331
+      project_id
     },
     headers: {
       Authorization: todoistKey,
