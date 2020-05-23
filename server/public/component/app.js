@@ -1,8 +1,11 @@
 class App {
-  constructor(createTodo) {
+  constructor(createTodo,tableTodos,loadingScreen,tbody) {
     this.createTodo = createTodo
+    this.tbody = tbody
+    this.tableTodos = tableTodos
+    this.loadingScreen = loadingScreen
     this.getTodosTask = this.getTodosTask.bind(this)
-    this.createProjects = new CreateProjects(this.getTodosTask)
+    this.createProjects = new CreateProjects(this.getTodosTask,tbody)
     this.handleGetTodosTaskSuccess = this.handleGetTodosTaskSuccess.bind(this)
     this.handleGetTodoProjectSuccess = this.handleGetTodoProjectSuccess.bind(this)
     this.handleSuccessGetRecommendation = this.handleSuccessGetRecommendation.bind(this);
@@ -15,10 +18,8 @@ class App {
     const defaultRecommendation = data.Similar.Results[0].Name;
     const recommendationsHeading = document.getElementById("recommendation");
     recommendationsHeading.textContent = `Todays recommended music for ${projectName} is ${defaultRecommendation}`;
-    const tableTodos = document.getElementById("getTodos")
-    const loadingScreen = document.getElementById("loadingScreen")
-    tableTodos.classList.remove("hidden")
-    loadingScreen.classList.add("hidden")
+    this.tableTodos.classList.remove("hidden")
+    this.loadingScreen.classList.add("hidden")
   }
 
   getRecommendation(queryKey) {
@@ -33,8 +34,7 @@ class App {
   }
 
   handleGetTodosTaskSuccess(data, queryKey){
-    console.log(data)
-    this.createTodo.renderTodo(data)
+    this.createTodo.renderTodo(data,this.tbody)
     this.getRecommendation(queryKey)
   }
 
@@ -49,7 +49,6 @@ class App {
   }
 
   handleGetTodoProjectSuccess(data){
-    console.log(data)
     this.createProjects.createProjectButtons(data)
   }
 

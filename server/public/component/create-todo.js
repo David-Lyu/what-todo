@@ -5,7 +5,6 @@ class CreateTodo {
   }
 
   handleTrClick(e,id) {
-    console.log(e.currentTarget.classList, typeof e.currentTarget.className)
     if(!e.currentTarget.className.includes("strikeout")){
       e.currentTarget.classList.add("strikeout")
       $.ajax({
@@ -28,8 +27,7 @@ class CreateTodo {
     formModal.classList.remove("hidden")
   }
 
-  renderTodo(todos){
-    const tbody = document.getElementById("todo")
+  renderTodo(todos,tbody){
     if(todos.length !== 0){
       for(let i = 0; i < todos.length; i++){
         const tr = document.createElement("tr");

@@ -49,7 +49,7 @@ app.post("/api/task", (req,res,next) => {
     },
     data: JSON.stringify({
       "content": content,
-      project_id: 2236484331
+      project_id: projectId
     })
   }
 
@@ -136,7 +136,7 @@ app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
 });
 
-app.use((err, req, res, next) => {
+app.use((err, req, res) => {
   if (err instanceof ClientError) {
     res.status(err.status).json({ error: err.message });
   } else {

@@ -1,9 +1,10 @@
 
-const todayTodos = document.querySelector(".today-todo");
-const todayTodosList = todayTodos.querySelector("ul");
-const createTodos = new CreateTodo()
+const tableTodos = document.getElementById("getTodos")
+const tbody = document.getElementById("todo")
+const loadingScreen = document.getElementById("loadingScreen")
 
-const app = new App(createTodos)
+const createTodos = new CreateTodo()
+const app = new App(createTodos,tableTodos,loadingScreen,tbody)
 app.start()
 
 const giveDate = document.getElementById("todaysDate")
