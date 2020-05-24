@@ -28,10 +28,11 @@ class CreateTodo {
 
     const form = document.querySelector("form")
     form.placeholder = todoItem.content
-    editTodoTask(form.children[0].children[0].value)
+    console.log(todoItem.id, form.children[0].children[0].value)
+    // editTodoTask(form.children[0].children[0].value)
   }
 
-  renderTodo(todos,tbody,){
+  renderTodo(todos,tbody,editTodoTask){
     console.log(todos)
     if(todos.length !== 0){
       for(let i = 0; i < todos.length; i++){
@@ -41,7 +42,7 @@ class CreateTodo {
         const tdContent = document.createElement("td")
         tdContent.textContent = todos[i].content
         const tdUtilites = document.createElement("td")
-        this.makeUtilites(tdUtilites,todos[i].id)
+        this.makeUtilites(tdUtilites,todos[i].id, editTodoTask)
         tr.append(tdContent,tdUtilites)
         tbody.append(tr)
       }
@@ -54,10 +55,10 @@ class CreateTodo {
     tbody.appendChild(addTodoTr)
   }
 
-  makeUtilites(td,todoItem) {
+  makeUtilites(td,todoItem, editTodoTask) {
     const editIcon = document.createElement("i")
     editIcon.className = "far fa-edit"
-    editIcon.addEventListener("click", (e) => this.handleEditClick(e,todoItem))
+    editIcon.addEventListener("click", (e) => this.handleEditClick(e,todoItem, editTodoTask))
     editIcon.addEventListener("mouseover", ()=>{editIcon.classList.add("edit-pointer")})
     editIcon.addEventListener("mouseout", ()=> editIcon.classList.remove("edit-pointer"))
     td.appendChild(editIcon)

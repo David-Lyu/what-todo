@@ -53,7 +53,7 @@ class App {
   }
 
   handleGetTodosTaskSuccess(data, queryKey){
-    this.createTodo.renderTodo(data,this.tbody)
+    this.createTodo.renderTodo(data, this.tbody, this.editTodoTask)
     this.getRecommendation(queryKey)
   }
 
@@ -82,7 +82,6 @@ class App {
   start(){
     this.getTodosTask();
     this.getTodosProjects();
-    this.getTodosTask.handleEditClick(null, null, this.editTodoTask)
   }
 }
 
