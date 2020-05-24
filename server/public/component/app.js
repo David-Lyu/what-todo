@@ -5,10 +5,29 @@ class App {
     this.tableTodos = tableTodos
     this.loadingScreen = loadingScreen
     this.getTodosTask = this.getTodosTask.bind(this)
+    this.editTodoTask = this.editTodoTask.bind(this)
     this.createProjects = new CreateProjects(this.getTodosTask,tbody)
+    this.handleEditTodoTaskSuccess = this.handleEditTodoTaskSuccess.bind(this)
     this.handleGetTodosTaskSuccess = this.handleGetTodosTaskSuccess.bind(this)
     this.handleGetTodoProjectSuccess = this.handleGetTodoProjectSuccess.bind(this)
     this.handleSuccessGetRecommendation = this.handleSuccessGetRecommendation.bind(this);
+  }
+
+  handleEditTodoTaskSuccess(e) {
+    this.tbody.innerHTML = "";
+    this.getTodosTask()
+  }
+
+  editTodoTask(todoId, content) {
+    $.ajax({
+      method: "PUT",
+      url: `/api/task/:${todoId}`,
+      data: {
+        content
+      },
+      success: this.handleEditTodoTaskSuccess,
+      error: console.error
+    })
   }
 
 
@@ -63,6 +82,7 @@ class App {
   start(){
     this.getTodosTask();
     this.getTodosProjects();
+    this.getTodosTask.handleEditClick(null, null, this.editTodoTask)
   }
 }
 

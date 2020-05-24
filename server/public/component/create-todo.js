@@ -19,24 +19,29 @@ class CreateTodo {
         })
     }
   }
-
-  handleEditClick(e){
+//dont know if editTodoTask will work the way i am passing it
+  handleEditClick(e,todoItem, editTodoTask){
     e.stopPropagation();
     console.log(e.currentTarget)
-    const formModal = document.querySelector("form")
+    const formModal = document.querySelector(".form-modal")
     formModal.classList.remove("hidden")
+
+    const form = document.querySelector("form")
+    form.placeholder = todoItem.content
+    editTodoTask(form.children[0].children[0].value)
   }
 
-  renderTodo(todos,tbody){
+  renderTodo(todos,tbody,){
+    console.log(todos)
     if(todos.length !== 0){
       for(let i = 0; i < todos.length; i++){
         const tr = document.createElement("tr");
-        tr.addEventListener("click", (e)=>this.handleTrClick(e,todos[i].id))
+        tr.addEventListener("click", (e)=>this.handleTrClick(e,todos[i]))
         tr.classList.add("pointer")
         const tdContent = document.createElement("td")
         tdContent.textContent = todos[i].content
         const tdUtilites = document.createElement("td")
-        this.makeUtilites(tdUtilites)
+        this.makeUtilites(tdUtilites,todos[i].id)
         tr.append(tdContent,tdUtilites)
         tbody.append(tr)
       }
@@ -49,10 +54,10 @@ class CreateTodo {
     tbody.appendChild(addTodoTr)
   }
 
-  makeUtilites(td) {
+  makeUtilites(td,todoItem) {
     const editIcon = document.createElement("i")
     editIcon.className = "far fa-edit"
-    editIcon.addEventListener("click", this.handleEditClick)
+    editIcon.addEventListener("click", (e) => this.handleEditClick(e,todoItem))
     editIcon.addEventListener("mouseover", ()=>{editIcon.classList.add("edit-pointer")})
     editIcon.addEventListener("mouseout", ()=> editIcon.classList.remove("edit-pointer"))
     td.appendChild(editIcon)
