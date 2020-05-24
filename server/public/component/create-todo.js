@@ -29,11 +29,10 @@ class CreateTodo {
     const form = document.querySelector("form")
     form.placeholder = todoItem.content
     console.log(todoItem.id, form.children[0].children[0].value)
-    // editTodoTask(form.children[0].children[0].value)
+    editTodoTask(todoItem.id, form.children[0].children[0].value)
   }
 
   renderTodo(todos,tbody,editTodoTask){
-    console.log(todos)
     if(todos.length !== 0){
       for(let i = 0; i < todos.length; i++){
         const tr = document.createElement("tr");
