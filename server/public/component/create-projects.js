@@ -13,10 +13,10 @@ class CreateProjects {
   createProjectButtons(projects) {
     const divProject = document.getElementById("projectButtons")
     console.log(projects)
-    for(let i = 0; i < projects.length; i++) {
+    for(let i = 1; i < projects.length; i++) {
       const buttonProject = document.createElement("button")
       buttonProject.textContent = projects[i].name
-      buttonProject.addEventListener("click", (e) => this.handleClick(projects[i]))
+      buttonProject.addEventListener("click", () => this.handleClick(projects[i]))
       divProject.appendChild(buttonProject)
     }
   }

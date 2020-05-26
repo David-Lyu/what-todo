@@ -84,7 +84,7 @@ app.post('/api/task/open/:taskId', (req, res, next) => {
   .catch( err => next(err))
 })
 
-app.post('/api/task/update/:taskId',(req,res,next) => {
+app.put('/api/task/:taskId',(req,res,next) => {
   const taskId = req.params.taskId;
   const {content} = req.body
   axios({

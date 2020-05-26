@@ -4,54 +4,50 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+  <link rel="stylesheet" href="css/mediaqueries.css">
   <link rel="stylesheet" href="css/grid.css">
   <link rel="stylesheet" href="style.css">
   <title>ToDo List</title>
 </head>
 <body class="container">
+  <div class="form-modal hidden">
+    <div class="inner-modal">
+      <form>
+        <label id="editTodos">
+          <input type="text">
+        </label>
+        <button>Submit</button>
+      </form>
+    </div>
+  </div>
 
   <header class="row header">
     <h1 class="col-8">What Todo?</h1>
     <h3 class="col-8">Today: <span id="todaysDate"></span></h3>
   </header>
-  <div id="projectButtons" class="row"></div>
+  <main>
+    <div class="row project-buttons">
+      <h3 class="col-3">Projects: </h3>
+      <div id="projectButtons" class="col-8"></div>
+    </div>
+    <img id="loadingScreen" class="loading-screen col-9" src="https://media.giphy.com/media/1n6FOu976kb1yr5uW5/giphy.gif" alt="Loading gif">
+    <section id="getTodos" class="today-todo hidden row">
+      <h3>
+        Todo List:
+        <span class="h6" id="recommendation"></span>
+      </h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Task</th>
+            <th>Utilities</th>
+          </tr>
+        </thead>
+        <tbody id="todo"></tbody>
+      </table>
+    </section>
+  </main>
 
-  <div class="row">
-    <main class="col-12">
-      <div class="calendar hidden">
-        <h1>Month</h1>
-        <ul class="weekdays">
-          <li>Sunday</li>
-          <li>Monday</li>
-          <li>Tuesday</li>
-          <li>WednesDay</li>
-          <li>Thursday</li>
-          <li>Friday</li>
-          <li>Saturday</li>
-        </ul>
-        <ul class="days d-none" id="getDay"></ul>
-        <ul class="months" id="getDaysOfMonth"></ul>
-      </div>
-
-      <img id="loadingScreen" class="loading-screen col-12" src="https://media.giphy.com/media/1n6FOu976kb1yr5uW5/giphy.gif" alt="Loading gif">
-
-      <section id="getTodos" class="today-todo hidden">
-        <h3>
-          Todo List:
-          <span id="recommendation"></span>
-        </h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Task</th>
-              <th>Utilities</th>
-            </tr>
-          </thead>
-          <tbody id="todo"></tbody>
-        </table>
-      </section>
-    </main>
-  </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="component/create-projects.js"></script>
   <script src="component/create-todo.js"></script>

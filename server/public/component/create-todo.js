@@ -5,13 +5,14 @@ class CreateTodo {
   }
 
   handleTrClick(e,id) {
-    if(!e.currentTarget.className.includes("strikeout")){
+    console.log(e.currentTarget)
+    if (!e.currentTarget.className.includes("strikeout")){
       e.currentTarget.classList.add("strikeout")
       $.ajax({
         method: "post",
         url: `/api/task/close/${id}`,
       })
-    }else {
+    } else {
       e.currentTarget.classList.remove("strikeout"),
         $.ajax({
           method: "post",
@@ -20,14 +21,26 @@ class CreateTodo {
     }
   }
 
-  handleEditClick(e){
+  handleEditClick(e,todoItem, editTodoTask){
     e.stopPropagation();
-    console.log(e.currentTarget)
-    const formModal = document.querySelector("form")
-    formModal.classList.remove("hidden")
+    if(!e.currentTarget.parentElement.parentElement.className.includes("strikeout")){
+      const formModal = document.querySelector(".form-modal")
+      formModal.addEventListener("click", ()=> {
+      formModal.classList.add("hidden")
+      })
+      formModal.classList.remove("hidden")
+      const innerModal = document.querySelector(".inner-modal")
+      innerModal.addEventListener("click", (e)=> e.stopPropagation())
+      const form = document.querySelector("form")
+      form.placeholder = todoItem.content
+      form.addEventListener("submit", e =>{
+        e.preventDefault();
+        editTodoTask(todoItem.id, form.children[0].children[0].value)
+      })
+    }
   }
 
-  renderTodo(todos,tbody){
+  renderTodo(todos,tbody,editTodoTask){
     if(todos.length !== 0){
       for(let i = 0; i < todos.length; i++){
         const tr = document.createElement("tr");
@@ -36,7 +49,7 @@ class CreateTodo {
         const tdContent = document.createElement("td")
         tdContent.textContent = todos[i].content
         const tdUtilites = document.createElement("td")
-        this.makeUtilites(tdUtilites)
+        this.makeUtilites(tdUtilites,todos[i].id, editTodoTask)
         tr.append(tdContent,tdUtilites)
         tbody.append(tr)
       }
@@ -49,10 +62,10 @@ class CreateTodo {
     tbody.appendChild(addTodoTr)
   }
 
-  makeUtilites(td) {
+  makeUtilites(td,todoItem, editTodoTask) {
     const editIcon = document.createElement("i")
     editIcon.className = "far fa-edit"
-    editIcon.addEventListener("click", this.handleEditClick)
+    editIcon.addEventListener("click", (e) => this.handleEditClick(e,todoItem, editTodoTask))
     editIcon.addEventListener("mouseover", ()=>{editIcon.classList.add("edit-pointer")})
     editIcon.addEventListener("mouseout", ()=> editIcon.classList.remove("edit-pointer"))
     td.appendChild(editIcon)
