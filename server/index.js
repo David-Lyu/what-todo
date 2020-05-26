@@ -87,6 +87,7 @@ app.post('/api/task/open/:taskId', (req, res, next) => {
 app.put('/api/task/:taskId',(req,res,next) => {
   const taskId = req.params.taskId;
   const {content} = req.body
+  console.log(content, req.body)
   axios({
     url: `https://api.todoist.com/rest/v1/tasks/${taskId}`,
     method: "POST",

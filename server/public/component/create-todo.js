@@ -21,7 +21,7 @@ class CreateTodo {
     }
   }
 
-  handleEditClick(e,todoItem, editTodoTask){
+  handleEditClick(e,todoId, editTodoTask){
     e.stopPropagation();
     if(!e.currentTarget.parentElement.parentElement.className.includes("strikeout")){
       const formModal = document.querySelector(".form-modal")
@@ -32,15 +32,16 @@ class CreateTodo {
       const innerModal = document.querySelector(".inner-modal")
       innerModal.addEventListener("click", (e)=> e.stopPropagation())
       const form = document.querySelector("form")
-      form.placeholder = todoItem.content
+      // form.placeholder = todoItem.content
       form.addEventListener("submit", e =>{
         e.preventDefault();
-        editTodoTask(todoItem.id, form.children[0].children[0].value)
+        editTodoTask(todoId, form.children[0].children[0].value)
       })
     }
   }
 
   renderTodo(todos,tbody,editTodoTask){
+    console.log(todos)
     if(todos.length !== 0){
       for(let i = 0; i < todos.length; i++){
         const tr = document.createElement("tr");
@@ -62,10 +63,10 @@ class CreateTodo {
     tbody.appendChild(addTodoTr)
   }
 
-  makeUtilites(td,todoItem, editTodoTask) {
+  makeUtilites(td,todoId, editTodoTask) {
     const editIcon = document.createElement("i")
     editIcon.className = "far fa-edit"
-    editIcon.addEventListener("click", (e) => this.handleEditClick(e,todoItem, editTodoTask))
+    editIcon.addEventListener("click", (e) => this.handleEditClick(e,todoId, editTodoTask))
     editIcon.addEventListener("mouseover", ()=>{editIcon.classList.add("edit-pointer")})
     editIcon.addEventListener("mouseout", ()=> editIcon.classList.remove("edit-pointer"))
     td.appendChild(editIcon)
