@@ -1,4 +1,4 @@
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 350px) {
   div.project-buttons > :last-child {
     margin-left: 30px;
   }
@@ -7,9 +7,6 @@
 @media only screen and (min-width: 500px) {
   div.project-buttons > :first-child {
     justify-content: flex-end;
-  }
-  div.project-buttons > :last-child {
-    margin-left: 30px;
   }
 }
 
@@ -20,5 +17,9 @@
 
   button {
     font-size: 1em;
+  }
+
+  th {
+    height: 50px;
   }
 }
