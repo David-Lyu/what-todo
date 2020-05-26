@@ -21,10 +21,11 @@ class App {
   editTodoTask(todoId, content) {
     $.ajax({
       method: "PUT",
-      url: `/api/task/:${todoId}`,
-      data: {
-        content
-      },
+      url: `/api/task/${todoId}`,
+      contentType: "application/json",
+      data: JSON.stringify({
+        content: content
+      }),
       success: this.handleEditTodoTaskSuccess,
       error: console.error
     })
@@ -47,7 +48,6 @@ class App {
   }
 
   getRecommendation(queryKey) {
-    console.log(queryKey)
     $.ajax(
       {
         url: `/api/recommendation/${queryKey}`,
@@ -59,12 +59,11 @@ class App {
   }
 
   handleGetTodosTaskSuccess(data, queryKey){
-    console.log(queryKey)
     this.createTodo.renderTodo(data, this.tbody, this.editTodoTask)
     this.getRecommendation(queryKey)
   }
 
-  getTodosTask(projectId = 2236484331, queryKey = "music") {
+  getTodosTask(projectId = 2236484331, queryKey = "you") {
     $.ajax(
       {
         url: `/api/task/${projectId}`,

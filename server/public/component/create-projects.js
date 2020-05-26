@@ -12,7 +12,6 @@ class CreateProjects {
 
   createProjectButtons(projects) {
     const divProject = document.getElementById("projectButtons")
-    console.log(projects)
     for(let i = 1; i < projects.length; i++) {
       const buttonProject = document.createElement("button")
       buttonProject.textContent = projects[i].name
