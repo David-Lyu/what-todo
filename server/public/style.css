@@ -13,6 +13,7 @@ body.container{
   max-width: 1200px;
   margin: auto;
   position: relative;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 header.header {
@@ -25,8 +26,23 @@ header > h3 {
   border: 1px black solid;
 }
 
+.project-buttons > * {
+  display: flex;
+}
+
+.project-buttons > div {
+  display: flex;
+  align-items: center;
+}
+
+span.h6 {
+  font-weight: 600;
+  font-size: .8em;
+}
+
 table {
     border-collapse: collapse;
+    width: 80%;
 }
 
 td {
@@ -34,13 +50,17 @@ td {
     padding: 5px 10px;
 }
 
-tr.strikeout td:before {
+tr.strikeout td:after {
     content: " ";
     position: absolute;
     top: 50%;
     left: 0;
     border-bottom: 1px solid #111;
     width: 100%;
+}
+
+td:last-child {
+  text-align: center;
 }
 
 thead {
@@ -61,15 +81,24 @@ tbody > :nth-child(odd) {
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: rgba( 0, 0, 0, 0.5);
+  background-color: rgba( 0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.inner-modal {
+  background-color: white;
+  width: 50%;
+  height: 50%;
+  z-index: 1;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.inner-modal {
-  background-color: white;
-}
+
 
 .hidden {
   display: none;

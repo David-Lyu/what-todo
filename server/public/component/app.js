@@ -13,7 +13,7 @@ class App {
     this.handleSuccessGetRecommendation = this.handleSuccessGetRecommendation.bind(this);
   }
 
-  handleEditTodoTaskSuccess(e) {
+  handleEditTodoTaskSuccess() {
     this.tbody.innerHTML = "";
     this.getTodosTask()
   }
@@ -34,7 +34,12 @@ class App {
   handleSuccessGetRecommendation(data, queryKey) {
     let projectName = queryKey
     console.log(data.Similar)
-    const defaultRecommendation = data.Similar.Results[0].Name;
+    let defaultRecommendation
+    if(data.Similar.Results.length === 0 ){
+      defaultRecommendation = "N/A";
+    } else {
+      defaultRecommendation = data.Similar.Results[0].Name;
+    }
     const recommendationsHeading = document.getElementById("recommendation");
     recommendationsHeading.textContent = `Todays recommended music for ${projectName} is ${defaultRecommendation}`;
     this.tableTodos.classList.remove("hidden")
@@ -42,6 +47,7 @@ class App {
   }
 
   getRecommendation(queryKey) {
+    console.log(queryKey)
     $.ajax(
       {
         url: `/api/recommendation/${queryKey}`,
@@ -53,11 +59,12 @@ class App {
   }
 
   handleGetTodosTaskSuccess(data, queryKey){
+    console.log(queryKey)
     this.createTodo.renderTodo(data, this.tbody, this.editTodoTask)
     this.getRecommendation(queryKey)
   }
 
-  getTodosTask(projectId = 2236484331, queryKey = "shopping") {
+  getTodosTask(projectId = 2236484331, queryKey = "music") {
     $.ajax(
       {
         url: `/api/task/${projectId}`,
@@ -84,34 +91,3 @@ class App {
     this.getTodosProjects();
   }
 }
-
-// makeTodaysTodos() {
-//   var arrayListOfTodo = this.todoInfo.listOfTodos;
-//   var recommendationsHeading = document.createElement("h4");
-//   recommendationsHeading.textContent = "Todays recommended music for shopping is " + this.recommendations.defaultRecommendation;
-//   this.todayTodosList.appendChild(recommendationsHeading)
-//   console.log(this.todoInfo.listOfTodos, arrayListOfTodo)
-//   for (var createListIndex = 0; createListIndex < arrayListOfTodo.length; createListIndex++) {
-//     var label = document.createElement("label")
-//     var li = document.createElement("li");
-//     var input = document.createElement("input")
-//     input.setAttribute("type", "checkbox")
-//     li.textContent = arrayListOfTodo[createListIndex].Content;
-//     li.id = arrayListOfTodo[createListIndex].Id;
-//     li.parentId = arrayListOfTodo[createListIndex].ProjectId;
-//     li.appendChild(input)
-//     li.addEventListener("click", this.deleteTodos)
-//     label.appendChild(li);
-//     this.todayTodosList.appendChild(label);
-//   }
-// }
-
-// deleteTodos(event) {
-//   console.log(event.target, event.currentTarget)
-//   this.deleteTodosArray = [];
-//   this.deleteTodosArray.push(event.currentTarget.id);
-//   var delElement = document.createElement("del");
-//   delElement.textContent = event.currentTarget.textContent
-//   event.currentTarget.innerHTML = "";
-//   event.currentTarget.appendChild(delElement)
-// }

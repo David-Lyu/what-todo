@@ -5,13 +5,14 @@ class CreateTodo {
   }
 
   handleTrClick(e,id) {
-    if(!e.currentTarget.className.includes("strikeout")){
+    console.log(e.currentTarget)
+    if (!e.currentTarget.className.includes("strikeout")){
       e.currentTarget.classList.add("strikeout")
       $.ajax({
         method: "post",
         url: `/api/task/close/${id}`,
       })
-    }else {
+    } else {
       e.currentTarget.classList.remove("strikeout"),
         $.ajax({
           method: "post",
@@ -19,24 +20,31 @@ class CreateTodo {
         })
     }
   }
-//dont know if editTodoTask will work the way i am passing it
+
   handleEditClick(e,todoItem, editTodoTask){
     e.stopPropagation();
-    console.log(e.currentTarget)
-    const formModal = document.querySelector(".form-modal")
-    formModal.classList.remove("hidden")
-
-    const form = document.querySelector("form")
-    form.placeholder = todoItem.content
-    console.log(todoItem.id, form.children[0].children[0].value)
-    editTodoTask(todoItem.id, form.children[0].children[0].value)
+    if(!e.currentTarget.parentElement.parentElement.className.includes("strikeout")){
+      const formModal = document.querySelector(".form-modal")
+      formModal.addEventListener("click", ()=> {
+      formModal.classList.add("hidden")
+      })
+      formModal.classList.remove("hidden")
+      const innerModal = document.querySelector(".inner-modal")
+      innerModal.addEventListener("click", (e)=> e.stopPropagation())
+      const form = document.querySelector("form")
+      form.placeholder = todoItem.content
+      form.addEventListener("submit", e =>{
+        e.preventDefault();
+        editTodoTask(todoItem.id, form.children[0].children[0].value)
+      })
+    }
   }
 
   renderTodo(todos,tbody,editTodoTask){
     if(todos.length !== 0){
       for(let i = 0; i < todos.length; i++){
         const tr = document.createElement("tr");
-        tr.addEventListener("click", (e)=>this.handleTrClick(e,todos[i]))
+        tr.addEventListener("click", (e)=>this.handleTrClick(e,todos[i].id))
         tr.classList.add("pointer")
         const tdContent = document.createElement("td")
         tdContent.textContent = todos[i].content
