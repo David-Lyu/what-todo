@@ -43,7 +43,6 @@ class CreateTodo {
   }
 
   renderTodo(todos,tbody,editTodoTask){
-    console.log(todos)
     if(todos.length !== 0){
       for(let i = 0; i < todos.length; i++){
         const tr = document.createElement("tr");
@@ -61,8 +60,6 @@ class CreateTodo {
       td.textContent = "No todos recorded"
       tbody.appendChild(td)
     }
-    const addTodoTr = document.createElement("tr")
-    tbody.appendChild(addTodoTr)
   }
 
   makeUtilites(td,todo, editTodoTask) {
