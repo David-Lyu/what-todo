@@ -1,14 +1,32 @@
 class CreateProjects {
-  constructor(getTodoTasks,tbody, createNewProject) {
+  constructor(getTodoTasks,tbody, createNewProject, deleteProject) {
+    this.formModal = document.querySelectorAll(".form-modal")[1]
     this.handleButtonClick = this.handleButtonClick.bind(this)
     this.handleAddProjectClick = this.handleAddProjectClick.bind(this)
     this.createNewProject = createNewProject
+    this.deleteProject = deleteProject
     this.getTodoTasks = getTodoTasks
     this.tbody = tbody
   }
 
+  handleShowDeleteButtonClick(projectUtilitiesDiv, deleteIcons) {
+    for (let i = 0; i < deleteIcons.length; i++) {
+      deleteIcons[i].classList.remove("hidden")
+    }
+    projectUtilitiesDiv.classList.add("hidden")
+    const cancelDeleteButton = projectUtilitiesDiv.nextElementSibling
+    cancelDeleteButton.classList.remove("hidden")
+    cancelDeleteButton.addEventListener("click",()=> {
+      for (let i = 0; i < deleteIcons.length; i++) {
+        deleteIcons[i].classList.add("hidden")
+      }
+      projectUtilitiesDiv.classList.remove("hidden")
+      cancelDeleteButton.classList.add("hidden")
+    })
+  }
+
   handleAddProjectClick(){
-    const formModal = document.querySelectorAll(".form-modal")[1]
+    const formModal = this.formModal
     formModal.addEventListener("click", () => {
       formModal.classList.add("hidden")
     })
@@ -36,13 +54,30 @@ class CreateProjects {
     const divProject = document.getElementById("projectButtons")
     divProject.innerHTML = ""
     for(let i = 1; i < projects.length; i++) {
+      const individualProjectDiv = document.createElement("div")
       const buttonProject = document.createElement("button")
       buttonProject.textContent = projects[i].name
       buttonProject.addEventListener("click", () => this.handleButtonClick(projects[i]))
+
       const deleteIcon = document.createElement("i")
-      divProject.appendChild(buttonProject)
+      deleteIcon.classList.add("hidden", "far", "fa-times-circle", "delete-project")
+      deleteIcon.addEventListener("click", () => this.deleteProject(projects[i].id))
+
+      individualProjectDiv.appendChild(deleteIcon)
+      individualProjectDiv.appendChild(buttonProject)
+      divProject.appendChild(individualProjectDiv)
     }
-    const addProjectButton = document.getElementById("projectUtilites").children[0]
-    addProjectButton.addEventListener("click", this.handleAddProjectClick)
+    const projectUtilitiesDiv = document.getElementById("projectUtilities")
+    const addProjectButton = projectUtilitiesDiv.children[0]
+    if (projects.length <= 5) {
+      addProjectButton.addEventListener("click", this.handleAddProjectClick)
+    } else {
+      addProjectButton.addEventListener("click",()=>alert("cannot have more than 5 projects"))
+      this.formModal.classList.add("hidden")
+    }
+
+    const deleteIcons = document.querySelectorAll(".delete-project")
+    const showDeleteIcon = projectUtilitiesDiv.children[1]
+    showDeleteIcon.addEventListener("click", ()=> this.handleShowDeleteButtonClick(projectUtilitiesDiv,deleteIcons))
   }
 }

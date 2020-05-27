@@ -28,15 +28,11 @@ header > h3 {
 
 .project-buttons > * {
   display: flex;
+  align-items: flex-end;
 }
 
 .project-buttons > h3 {
   margin-bottom: 0;
-}
-
-.project-buttons > div {
-  display: flex;
-  align-items: flex-end;
 }
 
 .project-buttons button {
