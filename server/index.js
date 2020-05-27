@@ -8,6 +8,7 @@ const staticMiddleware = require("./static-middleware")
 const todoistKey = `Bearer ${process.env.TODOIST}`
 
 app.use(staticMiddleware)
+app.use(express.json())
 
 app.get("/api/projects", (req,res,next) => {
   const parameter = {
@@ -20,7 +21,37 @@ app.get("/api/projects", (req,res,next) => {
   .catch(err => next(err))
 })
 
-app.get("/api/task/:projectId",(req,res,next) => {
+app.post("/api/projects", (req,res,next) => {
+  const { projectName } = req.body
+  const parameter = {
+    method: "POST",
+    url: "https://api.todoist.com/rest/v1/projects",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": todoistKey
+    },
+    data: JSON.stringify({
+      name: projectName
+    })
+  }
+  axios(parameter)
+  .then( data => res.status(200).json(data.data))
+  .catch(err=> next(err))
+})
+
+app.delete('/api/projects/:projectId', (req,res,next) => {
+  const projectId = req.params.projectId;
+  const parameter = {
+    headers: {
+      "Authorization": todoistKey
+    }
+  }
+  axios.delete(`https://api.todoist.com/rest/v1/projects/${projectId}`, parameter)
+  .then(data => res.status(201).json(data.data))
+  .catch( err => next(err))
+})
+
+app.get("/api/task/:projectId", (req,res,next) => {
   const project_id = req.params.projectId
   const parameter = {
     params: {
@@ -36,7 +67,6 @@ app.get("/api/task/:projectId",(req,res,next) => {
 })
 
 
-app.use(express.json())
 app.post("/api/task", (req,res,next) => {
   const {content, projectId } = req.body
 

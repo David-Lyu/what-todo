@@ -21,7 +21,7 @@ class CreateTodo {
     }
   }
 
-  handleEditClick(e,todoId, editTodoTask){
+  handleEditClick(e,todo, editTodoTask){
     e.stopPropagation();
     if(!e.currentTarget.parentElement.parentElement.className.includes("strikeout")){
       const formModal = document.querySelector(".form-modal")
@@ -32,10 +32,12 @@ class CreateTodo {
       const innerModal = document.querySelector(".inner-modal")
       innerModal.addEventListener("click", (e)=> e.stopPropagation())
       const form = document.querySelector("form")
-      // form.placeholder = todoItem.content
+      const pTag = form.children[0].children[0]
+      pTag.textContent = `You want to change "${todo.content}" to :`
+
       form.addEventListener("submit", e =>{
         e.preventDefault();
-        editTodoTask(todoId, form.children[0].children[0].value)
+        editTodoTask(todo.id, form.children[0].children[1].value)
       })
     }
   }
@@ -50,7 +52,7 @@ class CreateTodo {
         const tdContent = document.createElement("td")
         tdContent.textContent = todos[i].content
         const tdUtilites = document.createElement("td")
-        this.makeUtilites(tdUtilites,todos[i].id, editTodoTask)
+        this.makeUtilites(tdUtilites,todos[i], editTodoTask)
         tr.append(tdContent,tdUtilites)
         tbody.append(tr)
       }
@@ -63,10 +65,10 @@ class CreateTodo {
     tbody.appendChild(addTodoTr)
   }
 
-  makeUtilites(td,todoId, editTodoTask) {
+  makeUtilites(td,todo, editTodoTask) {
     const editIcon = document.createElement("i")
     editIcon.className = "far fa-edit"
-    editIcon.addEventListener("click", (e) => this.handleEditClick(e,todoId, editTodoTask))
+    editIcon.addEventListener("click", (e) => this.handleEditClick(e,todo, editTodoTask))
     editIcon.addEventListener("mouseover", ()=>{editIcon.classList.add("edit-pointer")})
     editIcon.addEventListener("mouseout", ()=> editIcon.classList.remove("edit-pointer"))
     td.appendChild(editIcon)
