@@ -14,12 +14,25 @@
     <div class="inner-modal">
       <form>
         <label id="editTodos">
+          <p></p>
           <input type="text">
         </label>
         <button>Submit</button>
       </form>
     </div>
   </div>
+
+    <div class="form-modal hidden">
+      <div class="inner-modal">
+        <form>
+          <label id="projectModal">
+            <p></p>
+            <input type="text">
+          </label>
+          <button>Submit</button>
+        </form>
+      </div>
+    </div>
 
   <header class="row header">
     <h1 class="col-8">What Todo?</h1>
@@ -29,6 +42,10 @@
     <div class="row project-buttons">
       <h3 class="col-3">Projects: </h3>
       <div id="projectButtons" class="col-8"></div>
+      <div id="projectUtilites">
+        <i class="far fa-plus-square"></i>
+        <i class="far fa-times-circle"></i>
+      </div>
     </div>
     <img id="loadingScreen" class="loading-screen col-9" src="https://media.giphy.com/media/1n6FOu976kb1yr5uW5/giphy.gif" alt="Loading gif">
     <section id="getTodos" class="today-todo hidden row">

@@ -6,31 +6,14 @@ class App {
     this.loadingScreen = loadingScreen
     this.getTodosTask = this.getTodosTask.bind(this)
     this.editTodoTask = this.editTodoTask.bind(this)
-    this.createProjects = new CreateProjects(this.getTodosTask,tbody)
+    this.getTodosProjects = this.getTodosProjects.bind(this)
+    this.createNewProject = this.createNewProject.bind(this)
     this.handleEditTodoTaskSuccess = this.handleEditTodoTaskSuccess.bind(this)
     this.handleGetTodosTaskSuccess = this.handleGetTodosTaskSuccess.bind(this)
     this.handleGetTodoProjectSuccess = this.handleGetTodoProjectSuccess.bind(this)
     this.handleSuccessGetRecommendation = this.handleSuccessGetRecommendation.bind(this);
+    this.createProjects = new CreateProjects(this.getTodosTask,tbody, this.createNewProject)
   }
-
-  handleEditTodoTaskSuccess() {
-    this.tbody.innerHTML = "";
-    this.getTodosTask()
-  }
-
-  editTodoTask(todoId, content) {
-    $.ajax({
-      method: "PUT",
-      url: `/api/task/${todoId}`,
-      contentType: "application/json",
-      data: JSON.stringify({
-        content: content
-      }),
-      success: this.handleEditTodoTaskSuccess,
-      error: console.error
-    })
-  }
-
 
   handleSuccessGetRecommendation(data, queryKey) {
     let projectName = queryKey
@@ -77,10 +60,41 @@ class App {
     this.createProjects.createProjectButtons(data)
   }
 
-  getTodosProjects(){
+  handleEditTodoTaskSuccess() {
+    this.tbody.innerHTML = "";
+    this.getTodosTask()
+  }
+
+  editTodoTask(todoId, content) {
+    $.ajax({
+      method: "PUT",
+      url: `/api/task/${todoId}`,
+      contentType: "application/json",
+      data: JSON.stringify({
+        content: content
+      }),
+      success: this.handleEditTodoTaskSuccess,
+      error: console.error
+    })
+  }
+
+  getTodosProjects() {
     $.ajax({
       url: '/api/projects',
       success: this.handleGetTodoProjectSuccess,
+      error: console.error
+    })
+  }
+
+  createNewProject(projectName) {
+    $.ajax({
+      method: 'POST',
+      url: '/api/projects',
+      contentType: 'application/json',
+      data: JSON.stringify({
+        projectName
+      }),
+      success: this.getTodosProjects,
       error: console.error
     })
   }
