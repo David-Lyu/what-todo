@@ -6,13 +6,14 @@ class App {
     this.loadingScreen = loadingScreen
     this.getTodosTask = this.getTodosTask.bind(this)
     this.editTodoTask = this.editTodoTask.bind(this)
+    this.deleteProject = this.deleteProject.bind(this)
     this.getTodosProjects = this.getTodosProjects.bind(this)
     this.createNewProject = this.createNewProject.bind(this)
     this.handleEditTodoTaskSuccess = this.handleEditTodoTaskSuccess.bind(this)
     this.handleGetTodosTaskSuccess = this.handleGetTodosTaskSuccess.bind(this)
     this.handleGetTodoProjectSuccess = this.handleGetTodoProjectSuccess.bind(this)
     this.handleSuccessGetRecommendation = this.handleSuccessGetRecommendation.bind(this);
-    this.createProjects = new CreateProjects(this.getTodosTask,tbody, this.createNewProject)
+    this.createProjects = new CreateProjects(this.getTodosTask,tbody, this.createNewProject,this.deleteProject)
   }
 
   handleSuccessGetRecommendation(data, queryKey) {
@@ -94,6 +95,15 @@ class App {
       data: JSON.stringify({
         projectName
       }),
+      success: this.getTodosProjects,
+      error: console.error
+    })
+  }
+
+  deleteProject(projectId) {
+    $.ajax({
+      method: "DELETE",
+      url: `/api/projects/${projectId}`,
       success: this.getTodosProjects,
       error: console.error
     })
