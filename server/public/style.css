@@ -43,6 +43,10 @@ header > h3 {
   margin-left: 10px;
 }
 
+div.project-buttons > div:nth-child(3) > i {
+  margin-left: 10px;
+}
+
 span.h6 {
   font-weight: 600;
   font-size: .8em;
