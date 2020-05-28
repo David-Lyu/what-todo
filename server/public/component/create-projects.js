@@ -36,9 +36,8 @@ class CreateProjects {
     const label = document.getElementById("projectModal")
     const pTag = label.children[0]
     pTag.textContent = "Create New Project:"
-
     const form = label.parentElement
-    console.log(form)
+
     form.addEventListener("submit", e => {
       e.preventDefault();
       this.createNewProject(label.children[1].value)
