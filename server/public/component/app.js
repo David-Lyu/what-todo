@@ -1,9 +1,11 @@
 class App {
-  constructor(createTodo,tableTodos,loadingScreen,tbody) {
+  constructor(createTodo,tableTodos,loadingScreen,tbody, addTodo) {
     this.createTodo = createTodo
+    this.addTodo = addTodo
     this.tbody = tbody
     this.tableTodos = tableTodos
     this.loadingScreen = loadingScreen
+    this.addTodoTask = this.addTodoTask.bind(this)
     this.getTodosTask = this.getTodosTask.bind(this)
     this.editTodoTask = this.editTodoTask.bind(this)
     this.deleteProject = this.deleteProject.bind(this)
@@ -18,7 +20,6 @@ class App {
 
   handleSuccessGetRecommendation(data, queryKey) {
     let projectName = queryKey
-    console.log(data.Similar)
     let defaultRecommendation
     if(data.Similar.Results.length === 0 ){
       defaultRecommendation = "N/A";
@@ -48,6 +49,7 @@ class App {
   }
 
   getTodosTask(projectId = 2236484331, queryKey = "you") {
+    this.addTodo.addNewTodo(this.addTodoTask, projectId, queryKey)
     $.ajax(
       {
         url: `/api/task/${projectId}`,
@@ -57,16 +59,11 @@ class App {
     )
   }
 
-  handleGetTodoProjectSuccess(data){
-    this.createProjects.createProjectButtons(data)
-  }
-
   handleEditTodoTaskSuccess() {
-    this.tbody.innerHTML = "";
     this.getTodosTask()
   }
 
-  editTodoTask(todoId, content) {
+  editTodoTask(content, todoId) {
     $.ajax({
       method: "PUT",
       url: `/api/task/${todoId}`,
@@ -77,6 +74,28 @@ class App {
       success: this.handleEditTodoTaskSuccess,
       error: console.error
     })
+  }
+
+  handleAddTodoTask(inputElement, projectId, queryKey) {
+    inputElement.value = "";
+    this.getTodosTask(projectId, queryKey)
+  }
+
+  addTodoTask(input, projectId, queryKey) {
+    $.ajax({
+      method: "POST",
+      url: `/api/task/${projectId}`,
+      contentType: "application/json",
+      data: JSON.stringify({
+        content: input.value
+      }),
+      success: () => this.handleAddTodoTask(input, projectId, queryKey),
+      error: console.error
+    })
+  }
+
+  handleGetTodoProjectSuccess(data){
+    this.createProjects.createProjectButtons(data)
   }
 
   getTodosProjects() {

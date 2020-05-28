@@ -67,9 +67,9 @@ app.get("/api/task/:projectId", (req,res,next) => {
 })
 
 
-app.post("/api/task", (req,res,next) => {
-  const {content, projectId } = req.body
-
+app.post("/api/task/:projectId", (req,res,next) => {
+  const { content } = req.body
+  const project_id = req.params.projectId
   const config = {
     method: "POST",
     url: "https://api.todoist.com/rest/v1/tasks",
@@ -79,7 +79,7 @@ app.post("/api/task", (req,res,next) => {
     },
     data: JSON.stringify({
       "content": content,
-      project_id: projectId
+      "project_id": parseInt(project_id)
     })
   }
 
@@ -117,7 +117,6 @@ app.post('/api/task/open/:taskId', (req, res, next) => {
 app.put('/api/task/:taskId',(req,res,next) => {
   const taskId = req.params.taskId;
   const {content} = req.body
-  console.log(content, req.body)
   axios({
     url: `https://api.todoist.com/rest/v1/tasks/${taskId}`,
     method: "POST",
