@@ -5,7 +5,6 @@ class CreateTodo {
   }
 
   handleTrClick(e,id) {
-    console.log(e.currentTarget)
     if (!e.currentTarget.className.includes("strikeout")){
       e.currentTarget.classList.add("strikeout")
       $.ajax({

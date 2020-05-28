@@ -1,6 +1,10 @@
 
-.pointer {
+.pointer, i, button{
   cursor: pointer;
+}
+
+.green {
+  color: green;
 }
 
 .edit-pointer {
@@ -11,6 +15,7 @@
 
 body.container{
   max-width: 1200px;
+  min-width: 360px;
   margin: auto;
   position: relative;
   font-family: Arial, Helvetica, sans-serif;
@@ -26,17 +31,31 @@ header > h3 {
   border: 1px black solid;
 }
 
+.project-buttons {
+  margin-top: 20px;
+  align-items: center;
+}
+
 .project-buttons > * {
   display: flex;
   align-items: flex-end;
+  overflow: auto;
 }
 
 .project-buttons > h3 {
-  margin-bottom: 0;
+  margin: 0;
+}
+
+.project-buttons > i: {
+
 }
 
 .project-buttons button {
-  margin-left: 10px;
+  margin: 0 10px;
+  padding: 0;
+  background-color: aquamarine;
+  border-radius: 15px;
+  padding: 3px 5px;
 }
 
 div.project-buttons > div:nth-child(3) > i {
@@ -46,6 +65,31 @@ div.project-buttons > div:nth-child(3) > i {
 span.h6 {
   font-weight: 600;
   font-size: .8em;
+}
+
+.cancel-button {
+  height: 50%;
+  border: 1px red solid;
+  background-color: red;
+  border-radius: 20px;
+  justify-content: center;
+  margin-left: 10px;
+}
+
+.delete-project, .red{
+  color: red;
+}
+
+#projectButtons > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+}
+
+.delete-project:hover {
+  background-color: yellow;
+  border-radius: 100%;
 }
 
 table {
@@ -85,6 +129,10 @@ tbody > :nth-child(even) {
 
 tbody > :nth-child(odd) {
   background-color: dodgerblue;
+}
+
+.add-todo {
+  margin-top: 20px;
 }
 
 .form-modal {
