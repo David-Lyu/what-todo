@@ -11,6 +11,7 @@
 
 body.container{
   max-width: 1200px;
+  min-width: 360px;
   margin: auto;
   position: relative;
   font-family: Arial, Helvetica, sans-serif;
@@ -29,6 +30,7 @@ header > h3 {
 .project-buttons > * {
   display: flex;
   align-items: flex-end;
+  overflow: auto;
 }
 
 .project-buttons > h3 {
@@ -46,6 +48,22 @@ div.project-buttons > div:nth-child(3) > i {
 span.h6 {
   font-weight: 600;
   font-size: .8em;
+}
+
+.cancel-button {
+  height: 50%;
+  border: 1px red solid;
+  border-radius: 50%;
+  text-align: center;
+}
+
+.delete-project {
+  color: red;
+}
+
+.delete-project:hover {
+  background-color: yellow;
+  border-radius: 100%;
 }
 
 table {
@@ -85,6 +103,10 @@ tbody > :nth-child(even) {
 
 tbody > :nth-child(odd) {
   background-color: dodgerblue;
+}
+
+.add-todo {
+  margin-top: 20px;
 }
 
 .form-modal {
