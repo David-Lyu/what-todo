@@ -63,7 +63,7 @@ class App {
     this.getTodosTask()
   }
 
-  editTodoTask(content, todoId) {
+  editTodoTask(todoId, content) {
     $.ajax({
       method: "PUT",
       url: `/api/task/${todoId}`,
