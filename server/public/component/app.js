@@ -49,7 +49,7 @@ class App {
   }
 
   getTodosTask(projectId = 2236484331, queryKey = "you") {
-    this.addTodo.addNewTodo(this.addTodoTask, projectId)
+    this.addTodo.addNewTodo(this.addTodoTask, projectId, queryKey)
     $.ajax(
       {
         url: `/api/task/${projectId}`,
@@ -59,9 +59,7 @@ class App {
     )
   }
 
-
   handleEditTodoTaskSuccess() {
-    this.tbody.innerHTML = "";
     this.getTodosTask()
   }
 
@@ -78,15 +76,20 @@ class App {
     })
   }
 
-  addTodoTask(newTask, projectId) {
+  handleAddTodoTask(inputElement, projectId, queryKey) {
+    inputElement.value = "";
+    this.getTodosTask(projectId, queryKey)
+  }
+
+  addTodoTask(input, projectId, queryKey) {
     $.ajax({
       method: "POST",
       url: `/api/task/${projectId}`,
       contentType: "application/json",
       data: JSON.stringify({
-        content: newTask
+        content: input.value
       }),
-      success: console.log,
+      success: () => this.handleAddTodoTask(input, projectId, queryKey),
       error: console.error
     })
   }

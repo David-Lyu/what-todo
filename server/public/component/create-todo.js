@@ -43,6 +43,7 @@ class CreateTodo {
   }
 
   renderTodo(todos,tbody,editTodoTask){
+    tbody.innerHTML = ""
     if(todos.length !== 0){
       for(let i = 0; i < todos.length; i++){
         const tr = document.createElement("tr");
