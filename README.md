@@ -26,3 +26,17 @@ Try the application live at [https://what-todo.davidlyu.com](https://what-todo.d
  
  ## Preview
  picture to come when app is finished
+ 
+ ## Development
+ 
+ ### Getting Started
+    1. Clone the repository.
+    
+        git clone https://github.com/David-Lyu/what-todo.git
+        cd what-todo
+    2. In stall all dependencies with NPM.
+    
+        npm install
+    3. Start running the project on [localhost:3004](http://localhost:3004) in your browser
+    
+        npm run dev
