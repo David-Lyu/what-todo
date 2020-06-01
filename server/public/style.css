@@ -10,15 +10,36 @@
 .edit-pointer {
   cursor: pointer;
   border: 1px yellow solid;
-  background-color: white;
+  background-color: black;
 }
 
-body.container{
+body.container {
   max-width: 1200px;
   min-width: 360px;
   margin: auto;
   position: relative;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+body.container > * {
+  background-color: white;
+}
+
+.background-picture {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-image: url(./assets/images/266.jpg);
+  background-repeat: no-repeat;
+  z-index: -1;
+  background-size: cover;
+}
+
+.background-picture > a {
+  font-size: 10px;
+  opacity: 0.4;
 }
 
 header.header {
@@ -97,6 +118,10 @@ table {
     width: 80%;
 }
 
+table i {
+  color: khaki;
+}
+
 th:last-child, td:last-child {
   border-left: 1px solid black;
 }
@@ -128,7 +153,7 @@ tbody > :nth-child(even) {
 }
 
 tbody > :nth-child(odd) {
-  background-color: dodgerblue;
+  background-color: lightseagreen ;
 }
 
 .add-todo {
