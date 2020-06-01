@@ -11,6 +11,9 @@ Try the application live at [https://what-todo.davidlyu.com](https://what-todo.d
   - HTML5
   - CSS3
   - AWS EC2
+  - express
+  - axios
+  - dotenv
 
 ## Features
   - User can add Todos
