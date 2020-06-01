@@ -14,9 +14,11 @@ Try the application live at [https://what-todo.davidlyu.com](https://what-todo.d
 
 ## Features
   - User can add Todos
-  - User can view Todos
+  - User can view Todos for a specific project
   - User can edit Todos
-  - User can delete Todos
+  - User can close/reopen Todos
+  - User can create project
+  - User can delete project
   - User can get recommendation based on Todos
  
  ## Preview
