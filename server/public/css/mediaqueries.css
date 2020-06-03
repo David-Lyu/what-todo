@@ -19,6 +19,10 @@
   form.add-todo button {
     margin-top: 5px;
   }
+
+  .inner-modal {
+    width: 80%;
+  }
 }
 
 @media only screen and (max-width: 800px) {

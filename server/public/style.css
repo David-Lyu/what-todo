@@ -174,7 +174,10 @@ tbody > :nth-child(odd) {
 }
 
 .inner-modal {
-  background-color: white;
+  background-image: url(./assets/images/notepad.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 15px;
   width: 50%;
   height: 50%;
   z-index: 1;
@@ -183,7 +186,9 @@ tbody > :nth-child(odd) {
   align-items: center;
 }
 
-
+.inner-modal > form {
+  background-color: khaki;
+}
 
 .hidden {
   display: none;
