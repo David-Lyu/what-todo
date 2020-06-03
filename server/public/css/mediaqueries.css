@@ -24,13 +24,9 @@
   .inner-modal {
     width: 80%;
   }
-  .inner-modal form {
-    width: 80%;
-    padding-left: 10px;
-  }
 
-  .inner-modal button {
-    margin: 0
+    .add-todo input {
+    margin-left: 10px;
   }
 }
 
