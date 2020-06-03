@@ -146,7 +146,8 @@ app.delete('/api/task/:taskId', (req,res,next) => {
 })
 
 app.get("/api/recommendation/:query",(req,res,next)=> {
-  const queryKey = req.params.query;
+  let queryKey = req.params.query;
+  if (queryKey === "today") queryKey = "beatles"
     axios({
       url: "https://tastedive.com/api/similar",
       method: "GET",

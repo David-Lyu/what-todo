@@ -18,7 +18,7 @@
       <form>
         <label id="editTodos">
           <p></p>
-          <input type="text">
+          <input required type="text" placeholder="Change Todo">
         </label>
         <button>Submit</button>
       </form>
@@ -30,7 +30,7 @@
       <form>
         <label id="projectModal">
           <p></p>
-          <input type="text">
+          <input required type="text" placeholder="New Project">
         </label>
         <button>Submit</button>
       </form>
@@ -80,11 +80,13 @@
       </section>
     </main>
 
-    <div class="row">
-      <form class="col-6 add-todo" id="addTodo">
+    <div class="row add-todo">
+      <form class="col-10" id="addTodo">
         <label>
-          Add Todos
-          <input required type="text">
+          <p>
+            Add Todos
+          </p>
+          <input required type="text" placeholder="New Todo">
           <button>Submit</button>
         </label>
       </form>
