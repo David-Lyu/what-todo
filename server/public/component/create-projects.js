@@ -2,6 +2,7 @@ class CreateProjects {
   constructor(getTodoTasks,tbody, createNewProject, deleteProject) {
     this.formModal = document.querySelectorAll(".form-modal")[1]
     this.handleButtonClick = this.handleButtonClick.bind(this)
+    this.handleSurplusProj = this.handleSurplusProj.bind(this)
     this.handleAddProjectClick = this.handleAddProjectClick.bind(this)
     this.createNewProject = createNewProject
     this.deleteProject = deleteProject
@@ -9,12 +10,17 @@ class CreateProjects {
     this.tbody = tbody
   }
 
-  handleShowDeleteButtonClick(projectUtilitiesDiv, deleteIcons) {
+  handleSurplusProj() {
+    const surplusProjModal = document.getElementById("surplusProject")
+    surplusProjModal.classList.remove("hidden")
+    surplusProjModal.addEventListener("click",()=> surplusProjModal.classList.add("hidden"))
+  }
+
+  handleShowDeleteButtonClick(projectUtilitiesDiv, deleteIcons, cancelDeleteButton) {
     for (let i = 0; i < deleteIcons.length; i++) {
       deleteIcons[i].classList.remove("hidden")
     }
     projectUtilitiesDiv.classList.add("hidden")
-    const cancelDeleteButton = projectUtilitiesDiv.nextElementSibling
     cancelDeleteButton.classList.remove("hidden")
     cancelDeleteButton.addEventListener("click",()=> {
       for (let i = 0; i < deleteIcons.length; i++) {
@@ -38,9 +44,14 @@ class CreateProjects {
     pTag.textContent = "Create New Project:"
     const form = label.parentElement
 
+    form.removeEventListener("submit", e=> {
+      e.preventDefault();
+    })
+
     form.addEventListener("submit", e => {
       e.preventDefault();
       this.createNewProject(label.children[1].value)
+      label.children[1].value = ""
     })
   }
 
@@ -50,6 +61,8 @@ class CreateProjects {
   }
 
   createProjectButtons(projects) {
+    const projectUtilitiesDiv = document.getElementById("projectUtilities")
+    const cancelDeleteButton = projectUtilitiesDiv.nextElementSibling
     const divProject = document.getElementById("projectButtons")
     divProject.innerHTML = ""
     for(let i = 1; i < projects.length; i++) {
@@ -59,24 +72,34 @@ class CreateProjects {
       buttonProject.addEventListener("click", () => this.handleButtonClick(projects[i]))
 
       const deleteIcon = document.createElement("i")
-      deleteIcon.classList.add("hidden", "far", "fa-times-circle", "delete-project")
-      deleteIcon.addEventListener("click", () => this.deleteProject(projects[i].id))
+      deleteIcon.classList.add('hidden', "far", "fa-times-circle", "delete-project")
+      deleteIcon.addEventListener("click", () => {
+        this.deleteProject(projects[i].id)
+        cancelDeleteButton.classList.add("hidden")
+        projectUtilitiesDiv.classList.remove("hidden")
+      })
 
       individualProjectDiv.appendChild(deleteIcon)
       individualProjectDiv.appendChild(buttonProject)
       divProject.appendChild(individualProjectDiv)
     }
-    const projectUtilitiesDiv = document.getElementById("projectUtilities")
+
     const addProjectButton = projectUtilitiesDiv.children[0]
-    if (projects.length <= 5) {
+    for(let i = 0; i < projectUtilitiesDiv.children.length; i++) {
+      console.log(projectUtilitiesDiv.children[i])
+      projectUtilitiesDiv.children[i].classList.remove("hidden")
+    }
+    addProjectButton.removeEventListener("click", this.handleAddProjectClick)
+    addProjectButton.removeEventListener("click", this.handleSurplusProj)
+    if (projects.length < 6) {
       addProjectButton.addEventListener("click", this.handleAddProjectClick)
     } else {
-      addProjectButton.addEventListener("click",()=>alert("cannot have more than 5 projects"))
+      addProjectButton.addEventListener("click",this.handleSurplusProj)
       this.formModal.classList.add("hidden")
     }
 
     const deleteIcons = document.querySelectorAll(".delete-project")
     const showDeleteIcon = projectUtilitiesDiv.children[1]
-    showDeleteIcon.addEventListener("click", ()=> this.handleShowDeleteButtonClick(projectUtilitiesDiv,deleteIcons))
+    showDeleteIcon.addEventListener("click", ()=> this.handleShowDeleteButtonClick(projectUtilitiesDiv,deleteIcons,cancelDeleteButton))
   }
 }

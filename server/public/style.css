@@ -13,7 +13,7 @@
   background-color: black;
 }
 
-body.container {
+body {
   max-width: 1200px;
   min-width: 360px;
   margin: auto;
@@ -21,7 +21,7 @@ body.container {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-body.container > * {
+.container {
   background-color: white;
 }
 
@@ -174,7 +174,10 @@ tbody > :nth-child(odd) {
 }
 
 .inner-modal {
-  background-color: white;
+  background-image: url(./assets/images/notepad.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 15px;
   width: 50%;
   height: 50%;
   z-index: 1;
@@ -183,7 +186,9 @@ tbody > :nth-child(odd) {
   align-items: center;
 }
 
-
+.inner-modal > form {
+  background-color: khaki;
+}
 
 .hidden {
   display: none;
