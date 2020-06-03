@@ -22,7 +22,7 @@ class App {
     let projectName = queryKey
     let defaultRecommendation
     if(data.Similar.Results.length === 0 ){
-      defaultRecommendation = "N/A";
+      defaultRecommendation = "Red Hot Chili Peppers";
     } else {
       defaultRecommendation = data.Similar.Results[0].Name;
     }
@@ -48,7 +48,7 @@ class App {
     this.getRecommendation(queryKey)
   }
 
-  getTodosTask(projectId = 2236484331, queryKey = "you") {
+  getTodosTask(projectId = 2236484331, queryKey = "today") {
     this.addTodo.addNewTodo(this.addTodoTask, projectId, queryKey)
     $.ajax(
       {

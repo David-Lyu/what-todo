@@ -71,7 +71,7 @@ header > h3 {
 
 }
 
-.project-buttons button {
+button {
   margin: 0 10px;
   padding: 0;
   background-color: aquamarine;
@@ -157,7 +157,15 @@ tbody > :nth-child(odd) {
 }
 
 .add-todo {
+  background-color: lightblue;
+  width: 65%;
   margin-top: 20px;
+  height: 120px;
+  align-items: center;
+}
+
+.add-todo p {
+  display: inline;
 }
 
 .form-modal {

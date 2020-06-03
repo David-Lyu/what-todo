@@ -86,7 +86,6 @@ class CreateProjects {
 
     const addProjectButton = projectUtilitiesDiv.children[0]
     for(let i = 0; i < projectUtilitiesDiv.children.length; i++) {
-      console.log(projectUtilitiesDiv.children[i])
       projectUtilitiesDiv.children[i].classList.remove("hidden")
     }
     addProjectButton.removeEventListener("click", this.handleAddProjectClick)

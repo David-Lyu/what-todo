@@ -11,17 +11,26 @@
 }
 
 @media only screen and (max-width: 700px) {
-  form.add-todo > label {
+
+  .add-todo label {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
   }
-  form.add-todo button {
+  .add-todo button {
     margin-top: 5px;
   }
 
   .inner-modal {
     width: 80%;
+  }
+  .inner-modal form {
+    width: 80%;
+    padding-left: 10px;
+  }
+
+  .inner-modal button {
+    margin: 0
   }
 }
 
@@ -53,5 +62,9 @@
 
   th {
     height: 50px;
+  }
+
+  .add-button {
+    width: 80%
   }
 }
