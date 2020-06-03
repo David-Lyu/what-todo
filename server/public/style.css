@@ -13,7 +13,7 @@
   background-color: black;
 }
 
-body.container {
+body {
   max-width: 1200px;
   min-width: 360px;
   margin: auto;
@@ -21,7 +21,7 @@ body.container {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-body.container > * {
+.container {
   background-color: white;
 }
 

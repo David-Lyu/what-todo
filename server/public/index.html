@@ -9,11 +9,11 @@
   <link rel="stylesheet" href="style.css">
   <title>ToDo List</title>
 </head>
-<body class="container">
+<body>
   <div class="background-picture">
     <a href="http://www.freepik.com">Designed by lifeforstock / Freepik</a>
   </div>
-  <div class="form-modal hidden">
+  <div class="form-modal edit-todos hidden">
     <div class="inner-modal">
       <form>
         <label id="editTodos">
@@ -25,69 +25,79 @@
     </div>
   </div>
 
-    <div class="form-modal hidden">
-      <div class="inner-modal">
-        <form>
-          <label id="projectModal">
-            <p></p>
-            <input type="text">
-          </label>
-          <button>Submit</button>
-        </form>
-      </div>
-    </div>
-
-  <header class="row header">
-    <h1 class="col-8">What Todo?</h1>
-    <h3 class="col-8">Today: <span id="todaysDate"></span></h3>
-  </header>
-
-  <div class="row project-buttons">
-    <h3 class="col-3">Projects: </h3>
-    <div id="projectButtons" class="col-7"></div>
-    <div id="projectUtilities">
-      <i class="far fa-plus-square green"></i>
-      <i class="far fa-times-circle red"></i>
-    </div>
-    <div class="hidden col-2 cancel-button">Cancel</div>
-  </div>
-
-  <main class="row">
-    <img id="loadingScreen" class="loading-screen col-9" src="https://media.giphy.com/media/1n6FOu976kb1yr5uW5/giphy.gif" alt="Loading gif">
-    <section id="getTodos" class="today-todo hidden row">
-      <h3>
-        Todo List:
-        <span class="h6" id="recommendation"></span>
-      </h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Task</th>
-            <th>Utilities</th>
-          </tr>
-        </thead>
-        <tbody id="todo"></tbody>
-      </table>
-    </section>
-  </main>
-
-  <div class="row">
-    <form class="col-6 add-todo" id="addTodo">
-    <label>
-      Add Todos
-      <input required type="text">
+  <div class="form-modal add-projects hidden">
+    <div class="inner-modal">
+      <form>
+        <label id="projectModal">
+          <p></p>
+          <input type="text">
+        </label>
         <button>Submit</button>
-      </label>
-    </form>
+      </form>
+    </div>
   </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="component/create-projects.js"></script>
-  <script src="component/create-todo.js"></script>
-  <script src="component/daysMonths.js"></script>
-  <script src="component/add-todo.js"></script>
-  <script src="component/app.js"></script>
+  <div class="form-modal hidden" id="surplusProject">
+    <div class="inner-modal">
+      <h4>
+        Cannot have more than five projects
+      </h4>
+    </div>
+  </div>
 
-  <script src="main.js"></script>
-</body>
-</html>
+  <div class="container">
+    <header class="row header">
+      <h1 class="col-8">What Todo?</h1>
+      <h3 class="col-8">Today: <span id="todaysDate"></span></h3>
+    </header>
+
+    <div class="row project-buttons">
+      <h3 class="col-3">Projects: </h3>
+      <div id="projectButtons" class="col-7"></div>
+      <div id="projectUtilities">
+        <i class="far fa-plus-square green"></i>
+        <i class="far fa-times-circle red"></i>
+      </div>
+      <div class="hidden col-2 cancel-button pointer">Cancel</div>
+    </div>
+
+    <main class="row">
+      <img id="loadingScreen" class="loading-screen col-9" src="https://media.giphy.com/media/1n6FOu976kb1yr5uW5/giphy.gif" alt="Loading gif">
+      <section id="getTodos" class="today-todo hidden row">
+        <h3>
+          Todo List:
+          <span class="h6" id="recommendation"></span>
+        </h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Task</th>
+              <th>Utilities</th>
+            </tr>
+          </thead>
+          <tbody id="todo"></tbody>
+        </table>
+      </section>
+    </main>
+
+    <div class="row">
+      <form class="col-6 add-todo" id="addTodo">
+        <label>
+          Add Todos
+          <input required type="text">
+          <button>Submit</button>
+        </label>
+      </form>
+    </div>
+  </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="component/create-projects.js"></script>
+    <script src="component/create-todo.js"></script>
+    <script src="component/daysMonths.js"></script>
+    <script src="component/add-todo.js"></script>
+    <script src="component/app.js"></script>
+
+    <script src="main.js"></script>
+  </body>
+  </html>
