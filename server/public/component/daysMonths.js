@@ -22,5 +22,4 @@ function getDays(month,year) {
   for(var getDaysIndex = 1; getDaysIndex <= numberOfDays; getDaysIndex++) {
     days.push(getDaysIndex)
   }
-  console.log(days)
 }
