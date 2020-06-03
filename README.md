@@ -25,7 +25,7 @@ Try the application live at [https://what-todo.davidlyu.com](https://what-todo.d
   - User can get recommendation based on Todos
  
  ## Preview
- ![Preview App](https://github.com/David-Lyu/what-todo/preview.gif)
+ ![Preview App](https://github.com/David-Lyu/what-todo/blob/master/preview.gif)
  
  ## Development
  
