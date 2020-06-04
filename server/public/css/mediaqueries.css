@@ -24,10 +24,6 @@
   .inner-modal {
     width: 80%;
   }
-
-    .add-todo input {
-    margin-left: 10px;
-  }
 }
 
 @media only screen and (max-width: 800px) {
