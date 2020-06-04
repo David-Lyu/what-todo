@@ -6,7 +6,7 @@ class AddToDo {
 
   handleSubmit(e) {
     e.preventDefault();
-    const input = e.currentTarget.children[0].children[0]
+    const input = e.currentTarget.children[0].children[1]
     this.addTodoTask(input, this.projectId, this.queryKey)
   }
 
@@ -18,4 +18,3 @@ class AddToDo {
     this.formElement.addEventListener("submit",this.handleSubmit)
   }
 }
-//put comment her
