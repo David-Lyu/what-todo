@@ -47,7 +47,7 @@ class CreateTodo {
       for(let i = 0; i < todos.length; i++){
         const tr = document.createElement("tr");
         tr.addEventListener("click", (e)=>this.handleTrClick(e,todos[i].id))
-        tr.classList.add("pointer")
+        tr.classList.add("pointer","hover-change")
         const tdContent = document.createElement("td")
         tdContent.textContent = todos[i].content
         const tdUtilites = document.createElement("td")
