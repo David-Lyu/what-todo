@@ -1,9 +1,12 @@
 class CreateProjects {
   constructor(getTodoTasks,tbody, createNewProject, deleteProject) {
     this.formModal = document.querySelectorAll(".form-modal")[1]
+    this.handleFormSubmit = this.handleFormSubmit.bind(this)
     this.handleButtonClick = this.handleButtonClick.bind(this)
     this.handleSurplusProj = this.handleSurplusProj.bind(this)
     this.handleAddProjectClick = this.handleAddProjectClick.bind(this)
+    this.label = document.getElementById("projectModal")
+    this.pTag = this.label.children[0]
     this.createNewProject = createNewProject
     this.deleteProject = deleteProject
     this.getTodoTasks = getTodoTasks
@@ -31,6 +34,13 @@ class CreateProjects {
     })
   }
 
+  handleFormSubmit(e) {
+    e.preventDefault();
+    this.createNewProject(this.label.children[1].value)
+    this.label.children[1].value = ""
+    this.formModal.classList.add("hidden")
+  }
+
   handleAddProjectClick(){
     const formModal = this.formModal
     formModal.addEventListener("click", () => {
@@ -39,20 +49,12 @@ class CreateProjects {
     formModal.classList.remove("hidden")
     const innerModal = document.querySelectorAll(".inner-modal")[1]
     innerModal.addEventListener("click", (e) => e.stopPropagation())
-    const label = document.getElementById("projectModal")
-    const pTag = label.children[0]
-    pTag.textContent = "Create New Project:"
-    const form = label.parentElement
+    this.pTag.textContent = "Create New Project:"
+    const form = this.label.parentElement
 
-    form.removeEventListener("submit", e=> {
-      e.preventDefault();
-    })
+    form.removeEventListener("submit", this.handleFormSubmit)
 
-    form.addEventListener("submit", e => {
-      e.preventDefault();
-      this.createNewProject(label.children[1].value)
-      label.children[1].value = ""
-    })
+    form.addEventListener("submit",this.handleFormSubmit)
   }
 
   handleButtonClick(project){
@@ -65,6 +67,7 @@ class CreateProjects {
     const cancelDeleteButton = projectUtilitiesDiv.nextElementSibling
     const divProject = document.getElementById("projectButtons")
     divProject.innerHTML = ""
+
     for(let i = 1; i < projects.length; i++) {
       const individualProjectDiv = document.createElement("div")
       const buttonProject = document.createElement("button")
@@ -77,6 +80,9 @@ class CreateProjects {
         this.deleteProject(projects[i].id)
         cancelDeleteButton.classList.add("hidden")
         projectUtilitiesDiv.classList.remove("hidden")
+        for (let i = 0; i < deleteIcons.length; i++) {
+          deleteIcons[i].classList.add("hidden")
+        }
       })
 
       individualProjectDiv.appendChild(deleteIcon)

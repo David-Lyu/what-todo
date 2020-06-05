@@ -22,7 +22,9 @@ class App {
     let projectName = queryKey
     let defaultRecommendation
     if(data.Similar.Results.length === 0 ){
-      defaultRecommendation = "Red Hot Chili Peppers";
+      const randomSong = ["Red Hot Chili Pepers", "White Stripes", "Beatles", "Foo Fighters", "Drake", "Beyonce"]
+      const randomNum = Math.floor(Math.random() * (randomSong.length -1))
+      defaultRecommendation = randomSong[randomNum];
     } else {
       defaultRecommendation = data.Similar.Results[0].Name;
     }
