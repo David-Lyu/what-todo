@@ -50,9 +50,11 @@
       <h1 class="col-8">What Todo?</h1>
       <h3 class="col-8">Today: <span id="todaysDate"></span></h3>
     </header>
-
     <div class="row project-buttons">
       <h3 class="col-3">Projects: </h3>
+      <div id="loadingProject" class="loading-screen col-8 hidden">
+        <img src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" alt="loading screen gif">
+      </div>
       <div id="projectButtons" class="col-7"></div>
       <div id="projectUtilities">
         <i class="far fa-plus-square green"></i>
@@ -62,7 +64,9 @@
     </div>
 
     <main class="row">
-      <img id="loadingScreen" class="loading-screen col-9" src="https://media.giphy.com/media/1n6FOu976kb1yr5uW5/giphy.gif" alt="Loading gif">
+      <div>
+        <img id="loadingScreen" class="loading-screen col-9" src="https://media.giphy.com/media/y1ZBcOGOOtlpC/giphy.gif" alt="Loading gif">
+      </div>
       <section id="getTodos" class="today-todo hidden row">
         <h3>
           Todo List:
