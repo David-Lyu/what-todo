@@ -1,6 +1,7 @@
 class CreateProjects {
-  constructor(getTodoTasks,tbody, createNewProject, deleteProject) {
+  constructor(getTodoTasks,tbody, createNewProject, deleteProject,loadingProject) {
     this.formModal = document.querySelectorAll(".form-modal")[1]
+    this.loadingProject = loadingProject
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
     this.handleButtonClick = this.handleButtonClick.bind(this)
     this.handleSurplusProj = this.handleSurplusProj.bind(this)
@@ -106,5 +107,7 @@ class CreateProjects {
     const deleteIcons = document.querySelectorAll(".delete-project")
     const showDeleteIcon = projectUtilitiesDiv.children[1]
     showDeleteIcon.addEventListener("click", ()=> this.handleShowDeleteButtonClick(projectUtilitiesDiv,deleteIcons,cancelDeleteButton))
+    this.loadingProject.classList.add("hidden")
+    this.loadingProject.nextElementSibling.classList.remove("hidden")
   }
 }
