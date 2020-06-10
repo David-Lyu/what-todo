@@ -129,6 +129,8 @@ class App {
   }
 
   deleteProject(projectId) {
+    this.loadingProject.nextElementSibling.classList.add("hidden")
+    this.loadingProject.classList.remove("hidden");
     $.ajax({
       method: "DELETE",
       url: `/api/projects/${projectId}`,
