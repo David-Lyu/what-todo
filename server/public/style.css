@@ -13,6 +13,13 @@
   background-color: black;
 }
 
+.loading-screen {
+  display: flex;
+  object-fit: scale-down;
+  justify-content: center;
+  align-items: center;
+}
+
 body {
   max-width: 1200px;
   min-width: 360px;
