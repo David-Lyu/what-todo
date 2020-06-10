@@ -47,6 +47,8 @@ class App {
   }
 
   handleGetTodosTaskSuccess(data, queryKey){
+    this.tableTodos.classList.remove("hidden")
+    this.loadingScreen.classList.add("hidden")
     this.createTodo.renderTodo(data, this.tbody, this.editTodoTask)
     this.getRecommendation(queryKey)
   }
@@ -85,6 +87,8 @@ class App {
   }
 
   addTodoTask(input, projectId, queryKey) {
+    this.loadingScreen.classList.remove("hidden")
+    this.tableTodos.classList.add("hidden")
     $.ajax({
       method: "POST",
       url: `/api/task/${projectId}`,
