@@ -37,7 +37,7 @@
     flex-wrap: nowrap;
   }
 
-  .project-buttons > div:nth-child(2) {
+  .project-buttons > div:nth-child(3) {
     border: 1px solid black;
     margin-left: 5px;
   }
