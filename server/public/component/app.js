@@ -1,11 +1,10 @@
 class App {
-  constructor(createTodo,tableTodos,loadingScreen,tbody, addTodo, loadingProject) {
+  constructor(createTodo,tableTodos,loadingScreen,tbody, addTodo) {
     this.createTodo = createTodo
     this.addTodo = addTodo
     this.tbody = tbody
     this.tableTodos = tableTodos
     this.loadingScreen = loadingScreen
-    this.loadingProject = loadingProject
     this.addTodoTask = this.addTodoTask.bind(this)
     this.getTodosTask = this.getTodosTask.bind(this)
     this.editTodoTask = this.editTodoTask.bind(this)
@@ -16,7 +15,7 @@ class App {
     this.handleGetTodosTaskSuccess = this.handleGetTodosTaskSuccess.bind(this)
     this.handleGetTodoProjectSuccess = this.handleGetTodoProjectSuccess.bind(this)
     this.handleSuccessGetRecommendation = this.handleSuccessGetRecommendation.bind(this);
-    this.createProjects = new CreateProjects(this.getTodosTask,tbody, this.createNewProject,this.deleteProject,loadingProject)
+    this.createProjects = new CreateProjects(this.getTodosTask,tbody, this.createNewProject,this.deleteProject)
   }
 
   handleSuccessGetRecommendation(data, queryKey) {
@@ -47,8 +46,6 @@ class App {
   }
 
   handleGetTodosTaskSuccess(data, queryKey){
-    this.tableTodos.classList.remove("hidden")
-    this.loadingScreen.classList.add("hidden")
     this.createTodo.renderTodo(data, this.tbody, this.editTodoTask)
     this.getRecommendation(queryKey)
   }
@@ -87,8 +84,6 @@ class App {
   }
 
   addTodoTask(input, projectId, queryKey) {
-    this.loadingScreen.classList.remove("hidden")
-    this.tableTodos.classList.add("hidden")
     $.ajax({
       method: "POST",
       url: `/api/task/${projectId}`,
@@ -106,8 +101,6 @@ class App {
   }
 
   getTodosProjects() {
-    this.loadingProject.nextElementSibling.classList.add("hidden")
-    this.loadingProject.classList.remove("hidden")
     $.ajax({
       url: '/api/projects',
       success: this.handleGetTodoProjectSuccess,

@@ -13,13 +13,6 @@
   background-color: black;
 }
 
-.loading-screen {
-  display: flex;
-  object-fit: scale-down;
-  justify-content: center;
-  align-items: center;
-}
-
 body {
   max-width: 1200px;
   min-width: 360px;
@@ -46,10 +39,7 @@ body {
 
 .background-picture > a {
   font-size: 10px;
-  opacity: 0.6;
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
+  opacity: 0.4;
 }
 
 header.header {
@@ -67,10 +57,6 @@ header > h3 {
   align-items: center;
 }
 
-.project-buttons > .loading-screen > img {
-  height: 50px;
-}
-
 .project-buttons > * {
   display: flex;
   align-items: flex-end;
@@ -81,7 +67,7 @@ header > h3 {
   margin: 0;
 }
 
-.project-buttons > i {
+.project-buttons > i: {
 
 }
 
