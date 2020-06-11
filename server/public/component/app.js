@@ -97,7 +97,10 @@ class App {
         content: input.value
       }),
       success: () => this.handleAddTodoTask(input, projectId, queryKey),
-      error: console.error
+      error: ()=> {
+        this.addTodo.handleBadRequest()
+        this.getTodosTask()
+      }
     })
   }
 

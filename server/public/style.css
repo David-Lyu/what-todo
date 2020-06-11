@@ -187,6 +187,7 @@ tbody > :nth-child(odd) {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
 .add-todo p {
@@ -195,6 +196,10 @@ tbody > :nth-child(odd) {
 
 .add-todo input {
   margin-left: 10px;
+}
+
+.content-modal button {
+  margin-bottom: 5px;
 }
 
 .form-modal {
@@ -228,7 +233,8 @@ tbody > :nth-child(odd) {
   }
 
 .inner-modal > form,
-.inner-modal label {
+.inner-modal label,
+.content-modal {
   width: 80%;
   display: flex;
   flex-direction: column;
