@@ -1,24 +1,25 @@
 class AddToDo {
-  constructor(formElement) {
-    this.formElement = formElement;
+  constructor(formElement, loadingScreen, tableTodos) {
+    this.formElement = formElement
+    this.tableTodos = tableTodos
+    this.loadingScreen = loadingScreen
     this.handleSubmit = this.handleSubmit.bind(this)
     this.removeModal = this.removeModal.bind(this)
   }
 
   removeModal() {
-    console.log("hello")
     this.formElement.nextElementSibling.classList.add("hidden")
   }
 
   handleBadRequest() {
     this.formElement.children[0].children[1].value = ""
     const errorModal = this.formElement.nextElementSibling
-    console.log(errorModal)
     errorModal.classList.remove("hidden")
     this.formElement.children[0].children[2].removeAttribute("disabled", null)
     const cancelButton = errorModal.children[0].children[1]
-    console.log(cancelButton)
     cancelButton.addEventListener("click", this.removeModal)
+    this.loadingScreen.classList.add("hidden")
+    this.tableTodos.classList.remove("hidden")
   }
 
   handleSubmit(e) {

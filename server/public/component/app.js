@@ -100,7 +100,6 @@ class App {
       success: () => this.handleAddTodoTask(input, projectId, queryKey),
       error: ()=> {
         this.addTodo.handleBadRequest()
-        this.getTodosTask()
       }
     })
   }
