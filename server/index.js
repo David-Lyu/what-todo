@@ -47,7 +47,7 @@ app.delete('/api/projects/:projectId', (req,res,next) => {
     }
   }
   axios.delete(`https://api.todoist.com/rest/v1/projects/${projectId}`, parameter)
-  .then(data => res.status(201).json(data.data))
+  .then(data => res.status(200).json(data.data))
   .catch( err => next(err))
 })
 
