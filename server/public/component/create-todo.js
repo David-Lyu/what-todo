@@ -1,7 +1,11 @@
 class CreateTodo {
-  constructor(){
+  constructor(formModalEdit, tableTodos){
+    this.formModalEdit = formModalEdit
+    this.tableTodos = tableTodos
+    this.tableLoadingScreen = tableTodos.previousElementSibling.children[0]
     this.handleTrClick = this.handleTrClick.bind(this)
     this.handleEditClick = this.handleEditClick.bind(this)
+    this.handleEditSubmit = this.handleEditSubmit.bind(this)
   }
 
   handleTrClick(e,id) {
@@ -20,26 +24,42 @@ class CreateTodo {
     }
   }
 
+  handleEditSuccess() {
+    this.tableTodos.classList.remove("hidden")
+    this.tableLoadingScreen.classList.add("hidden")
+  }
+
+  handleEditSubmit(e) {
+    console.log(e.currentTarget)
+    e.preventDefault();
+    console.log(this.todo, this.form)
+
+    this.editTodoTask(this.todo.id, this.form.children[0].children[1].value)
+    this.formModalEdit.classList.add("hidden")
+    this.inputTodoChange.value = ""
+    this.tableTodos.classList.add("hidden")
+    this.tableLoadingScreen.classList.remove("hidden")
+  }
+
   handleEditClick(e,todo, editTodoTask){
+    this.todo = todo
+    this.editTodoTask = editTodoTask
     e.stopPropagation();
     if(!e.currentTarget.parentElement.parentElement.className.includes("strikeout")){
-      const formModal = document.querySelector(".form-modal")
+      const formModal = this.formModalEdit
       formModal.addEventListener("click", ()=> {
       formModal.classList.add("hidden")
       })
       formModal.classList.remove("hidden")
       const innerModal = document.querySelector(".inner-modal")
       innerModal.addEventListener("click", (e)=> e.stopPropagation())
-      const form = document.querySelector("form")
-      const pTag = form.children[0].children[0]
+      this.form = document.querySelector("form")
+      const pTag = this.form.children[0].children[0]
       pTag.textContent = `You want to change "${todo.content}" to :`
-      const inputTodoChange = form.children[0].children[1]
-      inputTodoChange.setAttribute("placeholder", todo.content)
+      this.inputTodoChange = this.form.children[0].children[1]
+      this.inputTodoChange.setAttribute("placeholder", todo.content)
 
-      form.addEventListener("submit", e =>{
-        e.preventDefault();
-        editTodoTask(todo.id, form.children[0].children[1].value)
-      })
+      this.form.addEventListener("submit", this.handleEditSubmit)
     }
   }
 
