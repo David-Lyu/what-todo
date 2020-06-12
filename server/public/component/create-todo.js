@@ -35,7 +35,6 @@ class CreateTodo {
       pTag.textContent = `You want to change "${todo.content}" to :`
       const inputTodoChange = form.children[0].children[1]
       inputTodoChange.setAttribute("placeholder", todo.content)
-      console.log(inputTodoChange, todo.content)
 
       form.addEventListener("submit", e =>{
         e.preventDefault();
