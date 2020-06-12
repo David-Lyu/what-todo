@@ -50,7 +50,7 @@ class App {
     this.tableTodos.classList.remove("hidden")
     this.loadingScreen.classList.add("hidden")
     this.createTodo.renderTodo(data, this.tbody, this.editTodoTask)
-    this.createTodo.handleEditSuccess()
+    this.createTodo.handleEditResponse(true)
     this.getRecommendation(queryKey)
   }
 
@@ -78,7 +78,7 @@ class App {
         content: content
       }),
       success: this.handleEditTodoTaskSuccess,
-      error: console.error
+      error: this.createTodo.handleEditFail
     })
   }
 

@@ -6,6 +6,9 @@ class CreateTodo {
     this.handleTrClick = this.handleTrClick.bind(this)
     this.handleEditClick = this.handleEditClick.bind(this)
     this.handleEditSubmit = this.handleEditSubmit.bind(this)
+    this.handleEditFail = this.handleEditFail.bind(this)
+    this.handleEditResponse = this.handleEditResponse.bind(this)
+    this.cancelEditFailModal = this.cancelEditFailModal.bind(this)
   }
 
   handleTrClick(e,id) {
@@ -24,14 +27,27 @@ class CreateTodo {
     }
   }
 
-  handleEditSuccess() {
+  handleEditResponse() {
     this.tableTodos.classList.remove("hidden")
     this.tableLoadingScreen.classList.add("hidden")
   }
 
+  cancelEditFailModal() {
+    this.editModalFail.classList.add("hidden")
+  }
+
+  handleEditFail() {
+    this.handleEditResponse();
+    this.editModalFail = document.getElementById("editModalFail")
+    this.editModalFail.classList.remove("hidden")
+    this.editModalFail.addEventListener("click", this.cancelEditFailModal)
+    this.editModalFail.children[0].addEventListener("click", (e) => e.stopPropagation())
+    const cancelButton = this.editModalFail.children[0].children[1]
+    cancelButton.addEventListener("click", this.cancelEditFailModal)
+  }
+
   handleEditSubmit(e) {
     e.preventDefault();
-
     this.editTodoTask(this.todo.id, this.form.children[0].children[1].value)
     this.formModalEdit.classList.add("hidden")
     this.inputTodoChange.value = ""
@@ -55,7 +71,7 @@ class CreateTodo {
       const pTag = this.form.children[0].children[0]
       pTag.textContent = `You want to change "${todo.content}" to :`
       this.inputTodoChange = this.form.children[0].children[1]
-      this.inputTodoChange.setAttribute("placeholder", todo.content)
+      this.inputTodoChange.value = todo.content
 
       this.form.addEventListener("submit", this.handleEditSubmit)
     }
