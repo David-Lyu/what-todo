@@ -30,7 +30,6 @@ class CreateTodo {
   }
 
   handleEditSubmit(e) {
-    console.log(e.currentTarget)
     e.preventDefault();
 
     this.editTodoTask(this.todo.id, this.form.children[0].children[1].value)
