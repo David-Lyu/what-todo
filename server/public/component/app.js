@@ -50,6 +50,7 @@ class App {
     this.tableTodos.classList.remove("hidden")
     this.loadingScreen.classList.add("hidden")
     this.createTodo.renderTodo(data, this.tbody, this.editTodoTask)
+    this.createTodo.handleEditSuccess()
     this.getRecommendation(queryKey)
   }
 
@@ -69,6 +70,7 @@ class App {
   }
 
   editTodoTask(todoId, content) {
+    console.log(todoId, content)
     $.ajax({
       method: "PUT",
       url: `/api/task/${todoId}`,

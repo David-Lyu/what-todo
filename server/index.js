@@ -141,7 +141,7 @@ app.delete('/api/task/:taskId', (req,res,next) => {
       Authorization: todoistKey,
     }
   })
-  .then(data => res.status(201).json(data.data))
+  .then(data => res.status(200).json(data.data))
   .catch(err => next(err))
 })
 
