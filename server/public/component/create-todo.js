@@ -32,7 +32,6 @@ class CreateTodo {
   handleEditSubmit(e) {
     console.log(e.currentTarget)
     e.preventDefault();
-    console.log(this.todo, this.form)
 
     this.editTodoTask(this.todo.id, this.form.children[0].children[1].value)
     this.formModalEdit.classList.add("hidden")
